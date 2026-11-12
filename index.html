@@ -1,0 +1,805 @@
+<title>ArtistGrow</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: green brand band + white nav, dark content pages, dark-green footer. Single dark look taken from the TEAM-X Figma file. */
+:root{
+  --green:#1db954; --green-deep:#1f7e40; --ink:#191414; --ink-2:#231e1e; --paper:#fff;
+  --band:#06300f; --footer:#07240f; --muted:#b9b4b4; --line:rgba(255,255,255,.22); --warn:#f2b84b;
+  --display:'Montserrat','Gotham','Helvetica Neue',Arial,sans-serif;
+  --grad:linear-gradient(87deg,#1db954 13%,#231e1e 37%,#1f7e40 66%,#000 84%);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--display);font-size:16px;line-height:1.5;padding-block:0;padding-left:0;padding-right:0}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{background:var(--band);padding-block:20px}
+.band .wrap{display:flex;justify-content:center}
+.logo{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.3em;font-size:15px}
+.logo svg{width:52px;height:52px}
+nav.top{background:#fff;position:relative;z-index:5}
+nav.top .wrap{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,36px);flex-wrap:wrap;padding-block:18px}
+nav.top a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.02em}
+nav.top a:hover,nav.top a.on{color:var(--green)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--grad);display:grid;place-items:center;list-style:none;cursor:pointer}
+.avatar::-webkit-details-marker{display:none}
+.avatar svg{width:18px;height:18px}
+.menu{position:relative}
+.menu .pop{position:absolute;right:0;top:46px;background:#fff;border:1px solid #ddd;border-radius:10px;min-width:200px;padding:8px;display:grid;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.menu .pop a,.menu .pop button{padding:10px 12px;border-radius:6px;font:700 14px var(--display);color:var(--ink);background:none;border:0;text-align:left;cursor:pointer;text-decoration:none}
+.menu .pop a:hover,.menu .pop button:hover{background:#eef9f1;color:var(--green)}
+.menu .pop .who{padding:8px 12px;font-size:12px;color:#666;font-weight:500}
+.bell{position:relative;display:grid;place-items:center;width:36px;height:36px}
+.bell svg{width:24px;height:24px}
+.bell .ct{position:absolute;top:-2px;right:-4px;background:var(--green);color:#fff;font:700 11px var(--display);min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+h1,h2,h3{margin:0;text-wrap:balance}
+.eyebrow{color:var(--green);font-weight:800;text-transform:uppercase;font-size:clamp(26px,4vw,36px);line-height:1.1;margin:0}
+.sub{font-weight:700;font-size:clamp(15px,2vw,20px);margin:8px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 34px;border-radius:40px;border:1px solid transparent;
+  font:700 12px var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;color:#fff;background:var(--grad)}
+.btn.alt{background:#fff;color:var(--green);border-color:var(--green)}
+.btn.sq{border-radius:10px;background:#fff;color:var(--green);font-size:16px;letter-spacing:0;min-height:56px}
+.btn.sq.solid{background:var(--green);color:#fff}
+.btn.sm{min-height:40px;padding:0 20px;font-size:11px}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:#fff}
+.btn.ghost[aria-pressed="true"]{border-color:var(--green);color:var(--green)}
+.row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.sec{padding-block:56px}
+.rule{border:0;border-top:1px solid var(--line);margin:0}
+.hero{position:relative;min-height:520px;display:grid;place-items:center;text-align:center;padding:64px 0;overflow:hidden;
+  background:radial-gradient(900px 360px at 20% 110%,rgba(29,185,84,.55),transparent 70%),radial-gradient(700px 300px at 85% 0%,rgba(31,126,64,.55),transparent 70%),linear-gradient(180deg,#0e1a12,#13251a)}
+.hero .crowd{position:absolute;inset:auto 0 0 0;width:100%;height:46%;opacity:.9}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.15;font-weight:800;text-transform:uppercase;max-width:15em;margin:0 auto 32px;
+  background:linear-gradient(84deg,#1db954 13%,#e9f7ee 45%,#1f7e40 70%,#fff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;margin-top:40px}
+.why article{text-align:center;padding:8px 12px}
+.why .ic{width:64px;height:64px;border-radius:50%;margin:0 auto 18px;background:radial-gradient(circle at 30% 30%,#43e07a,#0d6b2e);display:grid;place-items:center}
+.why h3{font-size:22px;margin-bottom:10px}
+.why p{color:var(--muted);margin:0;line-height:1.8}
+.steps{display:grid;gap:20px;margin-top:36px}
+.step{display:flex;gap:24px;align-items:center;border:1px solid #fff;border-radius:10px;padding:26px 30px}
+.step .ck{flex:none;width:44px;height:44px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+.step h3{font-size:clamp(20px,3vw,30px)}
+.step p{margin:4px 0 0;color:var(--muted)}
+.search{display:flex;max-width:953px;margin:0 auto;border:3px solid #fff;background:transparent}
+.search input{flex:1;min-width:0;background:transparent;border:0;color:#fff;font:400 18px var(--display);padding:30px 28px}
+.search input::placeholder{color:#fff}
+.search .go{width:min(14%,120px);min-width:64px;background:var(--green);border:0;display:grid;place-items:center;cursor:pointer}
+.chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px;align-items:center}
+.chips select{background:var(--ink-2);color:#fff;border:1px solid var(--line);border-radius:40px;padding:10px 16px;font:700 12px var(--display)}
+.agrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),432px));gap:48px 60px;justify-content:center;margin-top:48px}
+.artist{position:relative;aspect-ratio:432/689;max-width:100%;overflow:hidden;background:#c4c4c4}
+.artist .ph{position:absolute;inset:0}
+.artist .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.82))}
+.artist .cap{position:absolute;left:6%;right:6%;bottom:5%;display:grid;gap:12px}
+.artist h3{color:var(--green);font-size:clamp(28px,4vw,45px);line-height:1.1}
+.artist .btns{display:flex;gap:10px;flex-wrap:wrap}
+.tag{display:inline-block;background:var(--green);color:#fff;font-size:12px;padding:5px 12px;text-transform:uppercase}
+.phl{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;color:rgba(255,255,255,.75);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:center}
+.phl svg{width:44px;height:44px}
+.roy-call{border:1px solid var(--green);background:rgba(29,185,84,.12);border-radius:10px;padding:16px 20px;margin:18px 0;font-size:18px;line-height:1.6}
+.roy-call b{color:var(--green);font-size:1.4em}
+.pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.proj{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:40px;margin-top:56px}
+.proj .cover{aspect-ratio:1/1.1;position:relative;overflow:hidden}
+.proj .cover img,.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.proj .date{font-size:16px;color:var(--muted)}
+.proj h3{font-size:clamp(28px,4.5vw,45px);line-height:1.1;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+.proj h3 small{font-size:18px;font-weight:400}
+.proj h3 em{font-style:normal;font-size:24px;color:var(--green)}
+.proj .tags,.tags{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}
+.proj p{line-height:1.9;margin:0 0 20px}
+.proj .acts2{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+@media(max-width:760px){.proj{grid-template-columns:1fr}}
+.bar{height:10px;background:rgba(255,255,255,.14);border-radius:5px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--green);border-radius:5px}
+.stats{font-size:14px;color:var(--muted);display:flex;gap:6px 18px;flex-wrap:wrap}
+.stats b{color:#fff}
+.banner{height:clamp(160px,24vw,300px);position:relative;overflow:hidden;margin-top:48px}
+.fund-h{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between;margin-top:28px}
+.fund-h h2{font-size:clamp(32px,5vw,45px)}
+.fund-h .by{font-size:18px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.fund-h .by button{color:var(--green);font:800 24px var(--display);background:none;border:0;cursor:pointer;padding:0;text-decoration:underline}
+.lead{line-height:2;max-width:1000px;margin:20px 0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin:28px auto;max-width:1100px}
+.tier{position:relative;text-align:left;font:inherit;background:#fff;color:var(--green);border:3px solid var(--green);padding:0 0 28px;cursor:pointer;min-height:245px}
+.tier .nm{display:block;margin:0 auto;width:58%;padding:24px 0;text-align:center;background:rgba(29,185,84,.2);font-weight:800;font-size:20px;text-transform:uppercase}
+.tier ul{list-style:none;margin:24px 0 20px;padding:0 0 0 21%;font-size:12px;display:grid;gap:12px}
+.tier li::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--green);margin-right:8px}
+.tier .pr{display:block;text-align:center;font-weight:800;font-size:clamp(22px,3vw,30px)}
+.tier[aria-pressed="true"]{background:#1f5a34;color:#fff}
+.tier[aria-pressed="true"] .nm{background:#fff;color:var(--green)}
+.tier[aria-pressed="true"] .pr{color:#fff}
+.pledge{display:flex;gap:14px;flex-wrap:wrap;align-items:end;justify-content:center;margin:10px 0}
+.pledge label{display:grid;gap:6px;font-weight:700;font-size:13px}
+.note{max-width:720px;margin:14px auto 0;text-align:center;color:var(--muted);min-height:1.5em}
+.note.left{margin-left:0;text-align:left}
+.trk{display:grid;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0}
+.trk .t{display:grid;grid-template-columns:auto 1fr auto auto;gap:14px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.trk .t:last-child{border-bottom:0}
+.trk .pb{height:4px;background:rgba(255,255,255,.14);margin-top:6px;border-radius:2px;overflow:hidden}
+.trk .pb i{display:block;height:100%;width:0;background:var(--green)}
+.trk .lk{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.panel{background:var(--ink-2);border:1px solid var(--line);border-radius:10px;padding:24px;margin-top:24px}
+.panel h3{font-size:20px;margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:28px}
+.tile{background:var(--ink-2);border:1px solid var(--line);border-radius:10px;padding:18px}
+.tile b{display:block;font-size:30px;color:var(--green);font-variant-numeric:tabular-nums}
+.tile span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.badge{display:inline-block;border:1px solid var(--green);color:var(--green);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;margin:4px 6px 4px 0}
+.badge.off{border-color:var(--line);color:var(--muted)}
+table.tbl{width:100%;border-collapse:collapse;font-size:14px}
+table.tbl th,table.tbl td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line)}
+table.tbl th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+table.tbl td.n,table.tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+table.tbl tr.me td{color:var(--green);font-weight:700}
+.scroll{overflow-x:auto}
+.empty{color:var(--muted);padding:12px 0}
+.feed{display:grid;gap:14px}
+.fi{border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:6px}
+.fi .m{font-size:12px;color:var(--muted)}
+.fi.unread{border-color:var(--green)}
+.fi p{margin:0;line-height:1.7}
+.mini{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.lab{font-size:13px;font-weight:700;display:grid;gap:6px}
+.in{width:100%;background:transparent;border:3px solid #fff;color:#fff;font:400 22px var(--display);padding:34px 28px;border-radius:0}
+.in.s{padding:12px 14px;font-size:15px;border-width:2px;border-radius:6px}
+.in::placeholder{color:#8f8a8a}
+select.in{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%);background-position:calc(100% - 28px) 50%,calc(100% - 20px) 50%;background-size:8px 8px;background-repeat:no-repeat}
+select.in.s{background-position:calc(100% - 18px) 50%,calc(100% - 12px) 50%;padding-right:36px}
+select.in option{color:#000}
+textarea.in{min-height:240px;line-height:1.8;resize:vertical}
+textarea.in.s{min-height:100px;line-height:1.6}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-top:10px}
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:36px 0 12px}
+.stepper .s{display:flex;align-items:center;gap:12px;font-weight:700;font-size:clamp(16px,2.6vw,30px);padding:0 4%}
+.stepper .n{width:44px;height:44px;border-radius:50%;border:2px solid var(--green);color:var(--green);display:grid;place-items:center;font-size:22px;font-weight:400}
+.stepper .s.on .n{background:var(--green);color:#fff}
+.stepper .s.on{color:var(--green)}
+.formbox{max-width:1200px;margin:32px auto 0}
+.field{display:grid;gap:12px;margin-top:36px}
+.field label,.lbl{font-weight:500;font-size:24px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 48px}
+.upload{border:4px solid var(--green);background:rgba(29,185,84,.3);min-height:300px;display:grid;place-items:center;text-align:center;cursor:pointer;margin-top:12px;padding:24px;position:relative;overflow:hidden}
+.upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.nav-btns{display:flex;gap:24px;justify-content:center;margin:56px 0 24px;flex-wrap:wrap}
+.done{border:3px solid var(--green);padding:36px;text-align:center;margin-top:36px}
+.done h3{color:var(--green);font-size:30px;margin-bottom:8px}
+.auth{display:grid;grid-template-columns:minmax(0,648fr) minmax(0,792fr);min-height:785px;background:#fff}
+.auth .l{display:grid;place-items:center;padding:32px}
+.auth .l svg{width:min(100%,483px);height:auto}
+.auth .r{background:var(--ink);padding:48px 16px;display:grid;place-items:center}
+.auth form{width:min(100%,370px);display:grid;gap:0;justify-items:center}
+.auth h2{font-size:30px;margin:16px 0 8px;text-align:center}
+.auth .sub2{font-size:14px;margin:0 0 28px;text-align:center}
+.soc{width:229px;height:44px;border-radius:15px;border:0;background:var(--grad);color:#fff;font:700 12px var(--display);cursor:pointer;margin-bottom:10px}
+.ln{width:100%;display:block;margin-top:16px}
+.ln span{font-size:12px;display:block;padding-left:22px}
+.ln input{width:100%;background:transparent;border:0;border-bottom:1px solid #fff;color:#fff;font:400 14px var(--display);padding:6px 22px 8px}
+.ln input:focus-visible{outline:0;border-bottom-color:var(--green)}
+.auth .sbtn{width:147px;min-height:61px;border-radius:10px;border:0;background:#fff;color:var(--green);font:700 18px var(--display);cursor:pointer;margin-top:36px}
+.auth .meta{display:flex;justify-content:space-between;width:100%;font-size:12px;color:var(--green);margin-top:18px}
+.auth .meta label{display:flex;gap:8px;align-items:center}
+.auth .alt{font-size:12px;margin-top:28px}
+.auth .alt a{color:var(--green);font-weight:700}
+.msg{font-size:13px;color:var(--green);margin-top:14px;min-height:1.4em;text-align:center}
+@media(max-width:820px){.auth{grid-template-columns:1fr}.auth .l{padding:24px 16px 0}}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:36px}
+.act{display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);border-radius:10px;padding:28px;text-decoration:none;color:#fff;background:var(--ink-2)}
+.act:hover{border-color:var(--green)}
+.act .who{color:var(--green);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.act h3{font-size:22px}
+.act p{margin:0;color:var(--muted);line-height:1.7;flex:1}
+.act .go2{color:var(--green);font-weight:700}
+.comment{border-bottom:1px solid var(--line);padding:12px 0}
+.comment b{color:var(--green)}
+.comment small{color:var(--muted);margin-left:8px}
+details.faq{border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-top:12px}
+details.faq summary{cursor:pointer;font-weight:700}
+details.faq p{color:var(--muted);line-height:1.8;margin:10px 0 0}
+.post{border:1px solid var(--line);border-radius:10px;padding:24px;margin-top:20px;display:grid;gap:8px}
+.post h3{font-size:24px}
+.post p{line-height:1.9;margin:0;color:var(--muted)}
+.post .cat{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.news{text-align:center;padding-block:56px 40px}
+.news h2{color:var(--green);font-weight:800;font-size:clamp(30px,5vw,45px)}
+.news p{font-weight:500;font-size:clamp(15px,2vw,24px);margin:14px 0 26px}
+.nl{display:flex;max-width:1155px;margin:0 auto;background:#fff;border:1px solid var(--green);border-radius:50px;overflow:hidden;min-height:100px}
+.nl input{flex:1;min-width:0;border:0;padding:0 clamp(18px,4vw,56px);font:500 clamp(15px,2.2vw,24px) var(--display);color:var(--ink);background:transparent}
+.nl input::placeholder{color:var(--green)}
+.nl button{border:0;border-radius:50px;background:var(--grad);color:#fff;font:700 clamp(15px,2.2vw,24px) var(--display);padding:0 clamp(24px,5vw,64px);cursor:pointer}
+footer{background:var(--footer);padding-block:56px 48px;text-align:center}
+footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:16px clamp(20px,4vw,48px);margin-bottom:36px}
+footer .links a{color:#fff;font-weight:700;font-size:12px;text-decoration:none;text-transform:uppercase}
+footer .links a:hover{color:var(--green)}
+footer hr{border:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);margin:0 auto 32px;max-width:900px}
+footer .logo{justify-content:center}
+.page[hidden]{display:none}
+@media(prefers-reduced-motion:no-preference){.page{animation:in .3s ease-out}@keyframes in{from{opacity:0}to{opacity:1}}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="mark" viewBox="0 0 52 52"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dff9f"/><stop offset="1" stop-color="#0b8a35"/></linearGradient></defs><circle cx="26" cy="26" r="24" fill="url(#mg)"/><circle cx="26" cy="26" r="9" fill="#06300f"/><path d="M10 33c6 9 22 11 30 0" stroke="#fff" stroke-opacity=".5" stroke-width="2" fill="none"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="srch" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" stroke="#fff" stroke-width="2" fill="none"/><path d="M15.5 15.5L21 21" stroke="#fff" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="usr" viewBox="0 0 24 24"><circle cx="10" cy="8" r="4" stroke="#fff" stroke-width="2" fill="none"/><path d="M3 21c0-4 3-6 7-6s7 2 7 6" stroke="#fff" stroke-width="2" fill="none"/><path d="M19 6v6M16 9h6" stroke="#fff" stroke-width="2"/></symbol>
+<symbol id="bel" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 1112 0v6l1.5 2h-15z" stroke="#191414" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M10 21h4" stroke="#191414" stroke-width="2" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<header>
+  <div class="band"><div class="wrap"><a class="logo" href="#home" aria-label="ArtistGrow home"><svg><use href="#mark"/></svg>ARTISTGROW</a></div></div>
+  <nav class="top" aria-label="Main"><div class="wrap">
+    <a href="#home" data-r="home">HOME</a>
+    <a href="#how-it-works" data-r="how-it-works">HOW IT WORKS</a>
+    <a href="#artists" data-r="artists">ARTISTS</a>
+    <a href="#projects" data-r="projects">PROJECTS</a>
+    <a href="#bids" data-r="bids">SONGS</a>
+    <a href="#blog" data-r="blog">BLOG</a>
+    <a href="#about" data-r="about">ABOUT</a>
+    <a href="#notifications" class="bell" data-r="notifications" aria-label="Notifications"><svg><use href="#bel"/></svg><span class="ct" id="bct" hidden>0</span></a>
+    <details class="menu" id="menu"><summary class="avatar" aria-label="Account menu"><svg><use href="#usr"/></svg></summary><div class="pop" id="pop"></div></details>
+  </div></nav>
+</header>
+
+<main id="main">
+<section class="page" data-page="home">
+  <div class="hero">
+    <svg class="crowd" viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true"><path d="M0 280V190c40-30 70-60 100-20s40 40 70 0 50-70 90-30 40 50 80 10 60-60 100-20 50 40 90 0 60-80 100-30 40 60 80 20 70-70 110-20 40 50 80 10 60-60 100-20 50 40 90 0 60-70 100-30 40 50 80 10 60-40 110-20 40 30 70 10V280z" fill="#050806"/></svg>
+    <div class="wrap">
+      <h1>Be a true fan of your favourite artist.</h1>
+      <p class="sub" style="margin:-12px auto 28px;max-width:30em;color:#e9f7ee">Back an album or EP and earn a share of its royalties.</p>
+      <div class="row"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a></div>
+    </div>
+  </div>
+  <div class="wrap sec">
+    <h2 class="eyebrow">Why ArtistGrow</h2>
+    <p class="sub">WHAT MAKES US DIFFERENT</p>
+    <div class="why">
+      <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Earn a share of the royalties</h3><p>Back an album or EP and receive points, early access, tracks and a share of the royalties in return for your support.</p></article>
+      <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Manage access</h3><p>Artists decide which tracks each funding tier unlocks, and fans see exactly what they get.</p></article>
+      <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Direct to the artist</h3><p>Your contribution goes toward the project you picked, so the people who make the music grow with it.</p></article>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:28px"><a class="btn sq" href="#how-it-works" style="border:1px solid var(--line)">Know More</a></div>
+  </div>
+  <div class="wrap"><hr class="rule"></div>
+  <div class="wrap sec">
+    <h2 class="eyebrow">How royalties work</h2>
+    <p class="sub">YOUR PLEDGE BUYS A SHARE OF WHAT THE MUSIC EARNS.</p>
+    <div class="why">
+      <article><div class="ic"><b style="font-size:26px">1</b></div><h3>Back a project</h3><p>Pledge to a tier. Your pledge is your slice of the project's royalty pool.</p></article>
+      <article><div class="ic"><b style="font-size:26px">2</b></div><h3>The music earns</h3><p>Streams and sales generate royalties after release. The artist sets the percentage shared with backers.</p></article>
+      <article><div class="ic"><b style="font-size:26px">3</b></div><h3>You share the income</h3><p>Royalties are split in proportion to pledges. See estimates and scenarios on every project page.</p></article>
+    </div>
+    <p class="note">Preview only: all figures are samples, returns are not guaranteed and no money moves.</p>
+    <hr class="rule" style="margin:48px 0">
+    <h2 class="eyebrow">What you can do</h2>
+    <p class="sub">PICK WHERE TO START.</p>
+    <div class="acts">
+      <a class="act" href="#projects"><span class="who">Fans</span><h3>Fund a project</h3><p>Choose a Bronze, Silver or Gold tier, pledge an amount, unlock tracks and earn a share of the royalties.</p><span class="go2">Browse projects →</span></a>
+      <a class="act" href="#artists"><span class="who">Fans</span><h3>Follow artists</h3><p>Follow artists to hear when they post updates or launch a new project.</p><span class="go2">Discover artists →</span></a>
+      <a class="act" href="#dashboard"><span class="who">Fans</span><h3>Track your support</h3><p>See what you backed, your points, badges and the tracks you have unlocked.</p><span class="go2">Open my support →</span></a>
+      <a class="act" href="#start"><span class="who">Artists</span><h3>Start a project</h3><p>Share your profile, set a goal and choose what each tier unlocks.</p><span class="go2">Start now →</span></a>
+      <a class="act" href="#studio"><span class="who">Artists</span><h3>Run your studio</h3><p>Post updates, message backers, control access and read your analytics.</p><span class="go2">Open studio →</span></a>
+      <a class="act" href="#bids"><span class="who">Fans and artists</span><h3>Buy or bid on songs</h3><p>Buy a song outright, or bid for early access and a share of its royalties.</p><span class="go2">See songs →</span></a>
+      <a class="act" href="#help"><span class="who">Everyone</span><h3>Get help</h3><p>Search the help center, read the blog or contact the team.</p><span class="go2">Help center →</span></a>
+    </div>
+  </div>
+  <div class="wrap"><hr class="rule"></div>
+  <div class="wrap sec">
+    <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:16px">
+      <div><h2 class="eyebrow">Featured Artists</h2><p class="sub">ARTISTS FROM ALL OVER THE WORLD</p></div>
+      <a class="btn sq" href="#artists">View all</a>
+    </div>
+    <div class="agrid" id="h-artists"></div>
+  </div>
+  <div class="wrap"><hr class="rule"></div>
+  <div class="wrap sec">
+    <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:16px">
+      <div><h2 class="eyebrow">Featured Projects</h2><p class="sub">HELP YOUR FAVORITE ARTISTS BRING THEIR PROJECT TO LIFE.</p></div>
+      <a class="btn sq" href="#projects">View all</a>
+    </div>
+    <div id="h-projects"></div>
+    <div class="row" style="margin-top:56px"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a></div>
+  </div>
+</section>
+
+<section class="page" data-page="how-it-works" hidden>
+  <div class="wrap sec">
+    <h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">HOW IT WORKS</h2>
+    <p class="sub">STEP BY STEP GUIDE ON HOW TO FUND A PROJECT.</p>
+    <div class="steps">
+      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Create an account.</h3><p>Sign up using your email or a third-party sign-in.</p></div></div>
+      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Discover projects.</h3><p>Browse albums and EPs, filter by genre, and preview tracks.</p></div></div>
+      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Select a project.</h3><p>Open a project to read about it and see the funding tiers.</p></div></div>
+      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Choose a funding option.</h3><p>Pick Bronze, Silver or Gold and enter your pledge amount.</p></div></div>
+      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Collect your rewards.</h3><p>Receive artist-grow points, access to the tracks your tier unlocks and a share of the project's royalties.</p></div></div>
+    </div>
+    <div class="row" style="margin-top:56px"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a><a class="btn alt" href="#help">More questions</a></div>
+  </div>
+</section>
+
+<section class="page" data-page="artists" hidden></section>
+<section class="page" data-page="artist" hidden></section>
+<section class="page" data-page="projects" hidden></section>
+<section class="page" data-page="fund" hidden></section>
+
+<section class="page" data-page="start" hidden>
+  <div class="wrap sec">
+    <h1 style="font-size:clamp(34px,6vw,45px);font-weight:800;text-align:center;margin-top:8px">Achieve your dream project</h1>
+    <div class="stepper" id="stepper"><div class="s on"><span class="n">1</span>Artist</div><div class="s"><span class="n">2</span>Project</div><div class="s"><span class="n">3</span>Rewards</div></div>
+    <form class="formbox" id="sform" novalidate>
+      <div data-s="1">
+        <h2 class="eyebrow" style="font-size:clamp(30px,4.5vw,36px)">ARTIST DETAILS</h2>
+        <p class="sub" style="font-size:clamp(18px,2.6vw,30px)">LET US KNOW MORE ABOUT YOU</p>
+        <div class="field"><span class="lbl">Upload your picture</span><label class="upload" for="pic"><span id="pic-t">Choose an image</span><input id="pic" type="file" accept="image/*"></label></div>
+        <div class="field"><label for="an">Name</label><input class="in" id="an" placeholder="Jeanne Perre Hakim" autocomplete="name"></div>
+        <div class="two">
+          <div class="field"><label for="ag">Genre</label><select class="in" id="ag"><option>Afro beats</option><option>Hip - Hop</option><option>Jazz</option><option>Soul</option><option>Rock</option></select></div>
+          <div class="field"><label for="as">Sex</label><select class="in" id="as"><option>Female</option><option>Male</option><option>Prefer not to say</option></select></div>
+        </div>
+        <div class="field"><label for="sp">Spotify profile</label><input class="in" id="sp" type="url" placeholder="https://open.spotify.com/artist/..."></div>
+      </div>
+      <div data-s="2" hidden>
+        <h2 class="eyebrow" style="font-size:clamp(30px,4.5vw,36px)">PROJECT DETAILS</h2>
+        <p class="sub" style="font-size:clamp(18px,2.6vw,30px)">TELL US ABOUT YOUR PROJECT</p>
+        <div class="field"><span class="lbl">Upload album cover</span><label class="upload" for="cov"><span id="cov-t">Choose an image</span><input id="cov" type="file" accept="image/*"></label></div>
+        <div class="field"><label for="pt">Title</label><input class="in" id="pt" placeholder="Wherever you go"></div>
+        <div class="two" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 32px">
+          <div class="field"><label for="pg">Genre</label><select class="in" id="pg"><option>Afro beats</option><option>Hip - Hop</option><option>Jazz</option><option>Soul</option><option>Rock</option></select></div>
+          <div class="field"><label for="pn">Number of Tracks</label><input class="in" id="pn" type="number" min="1" value="10"></div>
+          <div class="field"><label for="pk">Type of Project:</label><select class="in" id="pk"><option>Album</option><option>EP</option><option>Single</option></select></div>
+        </div>
+        <div class="two" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 32px">
+          <div class="field"><label for="pgoal">Funding goal ($)</label><input class="in" id="pgoal" type="number" min="100" value="10000"></div>
+          <div class="field"><label for="pdays">Campaign length (days)</label><input class="in" id="pdays" type="number" min="1" max="90" value="30"></div>
+        </div>
+        <div class="field"><label for="pd">Description</label><textarea class="in" id="pd" placeholder="Tell fans what this project is about."></textarea></div>
+      </div>
+      <div data-s="3" hidden>
+        <h2 class="eyebrow" style="font-size:clamp(30px,4.5vw,36px)">REWARDS</h2>
+        <p class="sub" style="font-size:clamp(18px,2.6vw,30px)">CHOOSE WHAT EACH TIER UNLOCKS</p>
+        <div class="two" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 32px">
+          <div class="field"><label for="rb">Bronze: tracks unlocked</label><input class="in" id="rb" type="number" min="0" value="2"></div>
+          <div class="field"><label for="rs">Silver: tracks unlocked</label><input class="in" id="rs" type="number" min="0" value="6"></div>
+          <div class="field"><label for="rg">Gold: tracks unlocked</label><input class="in" id="rg" type="number" min="0" value="10"></div>
+          <div class="field"><label for="rr">Royalty share to backers (%)</label><input class="in" id="rr" type="number" min="0" max="50" value="10"></div>
+        </div>
+      </div>
+      <p class="msg" id="smsg" role="status"></p>
+      <div class="done" id="sdone" hidden role="status"><h3>Your project is live</h3><p id="sdone-t"></p><div class="row" style="margin-top:20px"><a class="btn sq solid" href="#studio">Open studio</a><a class="btn sq" href="#projects">See projects</a></div></div>
+      <div class="nav-btns"><button class="btn sq" type="button" id="back" hidden>BACK</button><button class="btn sq solid" type="submit" id="next">NEXT</button></div>
+    </form>
+  </div>
+</section>
+
+<section class="page" data-page="signin" hidden>
+  <div class="auth">
+    <div class="l"><svg viewBox="0 0 483 365" aria-hidden="true"><ellipse cx="240" cy="330" rx="200" ry="22" fill="#e8f7ee"/><rect x="150" y="60" width="180" height="250" rx="16" fill="#1db954"/><rect x="170" y="90" width="140" height="14" rx="7" fill="#fff" opacity=".9"/><rect x="170" y="120" width="100" height="10" rx="5" fill="#fff" opacity=".6"/><circle cx="240" cy="220" r="46" fill="#06300f"/><circle cx="240" cy="220" r="14" fill="#1db954"/><path d="M90 150c0-30 30-40 30-40v80a18 18 0 11-12-17z" fill="#191414"/><path d="M380 110c0-20 20-28 20-28v60a14 14 0 11-10-13z" fill="#1f7e40"/></svg></div>
+    <div class="r"><form id="auth-form" novalidate>
+      <svg width="80" height="80"><use href="#mark"/></svg>
+      <h2 id="auth-h">Welcome back.</h2><p class="sub2">Contribute to the growth of your favourite artists</p>
+      <button class="soc" type="button" data-act="social" data-p="Google">Sign in with Google</button><button class="soc" type="button" data-act="social" data-p="Facebook">Sign in with Facebook</button><button class="soc" type="button" data-act="social" data-p="Spotify">Sign in with Spotify</button>
+      <label class="ln" id="l-name" hidden><span>Full Name</span><input id="fn" autocomplete="name"></label>
+      <label class="ln"><span>Email Address</span><input id="em" type="email" autocomplete="email"></label>
+      <label class="ln"><span>Password</span><input id="pw" type="password" autocomplete="current-password"></label>
+      <label class="ln" id="l-pw2" hidden><span>Confirm password</span><input id="pw2" type="password" autocomplete="new-password"></label>
+      <div class="meta" id="meta"><label><input type="checkbox" id="rm"> Remember me</label><a href="#help" style="color:var(--green)">Forgot Password?</a></div>
+      <button class="sbtn" type="submit" id="auth-b">SIGN IN</button>
+      <div class="msg" id="auth-m" role="status"></div>
+      <p class="alt" id="auth-alt">New User? <a href="#signup">Sign Up</a></p>
+    </form></div>
+  </div>
+</section>
+
+<section class="page" data-page="dashboard" hidden></section>
+<section class="page" data-page="studio" hidden></section>
+<section class="page" data-page="account" hidden></section>
+<section class="page" data-page="notifications" hidden></section>
+<section class="page" data-page="help" hidden></section>
+<section class="page" data-page="blog" hidden></section>
+<section class="page" data-page="bids" hidden></section>
+<section class="page" data-page="about" hidden></section>
+</main>
+
+<div class="news wrap">
+  <h2>Join our mailing list</h2>
+  <p>Subscribe to our newsletter to receive weekly news and articles on your favourite artists</p>
+  <form class="nl" id="nl" novalidate><input id="nle" type="email" placeholder="Enter your email address" aria-label="Email address"><button type="submit">Subscribe</button></form>
+  <p class="note" id="nlm" role="status"></p>
+</div>
+<footer><div class="wrap">
+  <div class="links"><a href="#home">Home</a><a href="#artists">Artists</a><a href="#projects">Projects</a><a href="#start">Start a project</a><a href="#blog">Blog</a><a href="#about">About</a><a href="#help">Help</a><a href="#dashboard">My account</a></div>
+  <hr><a class="logo" href="#home"><svg><use href="#mark"/></svg>ARTISTGROW</a>
+</div></footer>
+
+<script>
+(function(){
+/* ---------- data (sample content) ---------- */
+var tones=[["#3a2a22","#b0826a"],["#3b2a2e","#d09a98"],["#2b2f3a","#8f9cb8"],["#1c1c1c","#6b6b6b"],["#40242a","#c9757c"],["#3a2b22","#d38a52"],["#34263a","#9c7fb4"],["#2a0f0a","#c2431f"]];
+var GENRES=["Hip - Hop","Soul","Afro beats","Jazz","Rock"];
+var T={Bronze:{min:50,max:500,pts:200,tr:2,label:"$50 - $500"},Silver:{min:501,max:1000,pts:500,tr:6,label:"$501 - $1000"},Gold:{min:1000,max:3000,pts:1000,tr:99,label:"$1000 - $3000"}};
+var A=[
+ {id:"ige",name:"Ige Martins",genre:"Hip - Hop",loc:"Lagos, Nigeria",bio:"Rapper and producer writing about home, distance and second chances. Releasing a six-track album this autumn."},
+ {id:"amara",name:"Amara Cole",genre:"Soul",loc:"Atlanta, USA",bio:"Soul singer with a church-choir background. Recording a warm, slow EP in a small home studio."},
+ {id:"tobi",name:"Tobi Adeyemi",genre:"Afro beats",loc:"London, UK",bio:"Afrobeats producer mixing highlife guitars with club drums. Touring festivals across Europe."},
+ {id:"nina",name:"Nina Voss",genre:"Jazz",loc:"Berlin, Germany",bio:"Jazz pianist and composer. Writes for trio and string quartet."},
+ {id:"kemi",name:"Kemi Okafor",genre:"Afro beats",loc:"Accra, Ghana",bio:"Singer-songwriter capturing market days and city nights in Accra."},
+ {id:"lena",name:"Lena Rhodes",genre:"Rock",loc:"Glasgow, UK",bio:"Guitarist fronting a three-piece. Loud, melodic and recorded live."},
+ {id:"sade",name:"Sade Bright",genre:"Soul",loc:"Toronto, Canada",bio:"Vocalist and arranger blending soul with gospel harmony."},
+ {id:"marcus",name:"Marcus Hale",genre:"Hip - Hop",loc:"Chicago, USA",bio:"Lyricist and beatmaker. Independent since his first mixtape."}
+];
+var DESC="This record follows an artist on the move, written between tour stops and recorded over one winter. Backers get early access to finished tracks, behind-the-scenes notes, and a say in how the final songs are sequenced. Funding goes to studio time, mixing and mastering.";
+var SRC={Instagram:38,Direct:24,Spotify:21,Search:12,Other:5};
+function mk(id,title,aid,genre,n,type,date,goal,raised,backers,days,min,hist,cnt,tl,ord){return {id:id,title:title,aid:aid,genre:genre,tracks:n,type:type,date:date,goal:goal,raised:raised,backers:backers,days:days,min:min,hist:hist,cnt:cnt,tl:tl,ord:ord,desc:DESC}}
+var P=[
+ mk("p1","Wherever you go","ige","Hip - Hop",6,"ALBUM","19 - 09 - 2026",12000,7450,112,18,50,[420,610,380,900,540,770,1050],{Bronze:70,Silver:34,Gold:8},["Wherever you go","Lagos at night","Slow burn","Ten toes","Home by dawn","Last call"],6),
+ mk("p2","Golden hour","amara","Soul",8,"EP","02 - 10 - 2026",9000,6100,88,25,25,[300,260,510,420,380,640,590],{Bronze:55,Silver:27,Gold:6},["Golden hour","Porch light","Sunday dress","Honey","Slow river","Come closer","Amen","Evening"],5),
+ mk("p3","Lagos nights","tobi","Afro beats",10,"ALBUM","14 - 10 - 2026",20000,8200,140,12,75,[200,350,410,560,700,820,960],{Bronze:90,Silver:41,Gold:9},["Lagos nights","Highlife","Danfo","Ojuelegba","Detty","Pepper","Moonwalk","Surulere","Aso Rock","Morning"],4),
+ mk("p4","Quiet rooms","nina","Jazz",6,"EP","27 - 10 - 2026",7000,5600,64,35,150,[150,210,300,260,420,380,510],{Bronze:30,Silver:26,Gold:8},["Quiet rooms","Interval","Slant light","Fourths","Nocturne","Close"],3),
+ mk("p5","Rust and roses","lena","Rock",8,"EP","09 - 11 - 2026",8000,2100,35,9,50,[80,120,60,200,180,310,260],{Bronze:20,Silver:12,Gold:3},["Rust and roses","Static","Tin roof","Daylight","Last train","Wire","Feedback","Dawn chorus"],2),
+ mk("p6","Sunday market","kemi","Afro beats",9,"ALBUM","21 - 11 - 2026",15000,4300,58,40,100,[240,180,330,210,400,350,420],{Bronze:34,Silver:18,Gold:6},["Sunday market","Kente","Hawker","Osu","Rain song","Waakye","Harmattan","Closing time","Home"],1)
+];
+var BLOG=[
+ {id:"b1",cat:"Interviews",title:"Ige Martins on writing an album between tour stops",date:"3 November 2026",body:["Ige Martins wrote most of Wherever you go in hotel rooms and airport lounges, recording voice notes that later became verses.","He says the album is about the distance between where you are and where you belong, and that backers shaped the track order by voting in the project updates."]},
+ {id:"b2",cat:"Announcements",title:"New: preview tracks before you back a project",date:"28 October 2026",body:["Every project page now has a track list with a preview button for each song.","Artists choose which tracks are included in Bronze, Silver and Gold, and the track list shows exactly what each tier unlocks."]},
+ {id:"b3",cat:"Interviews",title:"Amara Cole: recording soul in a spare room",date:"20 October 2026",body:["Amara Cole recorded Golden hour on a borrowed microphone and a hung duvet. She says limits made the songs simpler and warmer.","She uses project updates to share rough mixes with backers before anything is finalized."]},
+ {id:"b4",cat:"Announcements",title:"Backer badges and the points leaderboard",date:"12 October 2026",body:["Backers now earn badges such as Early supporter and Gold backer, and a leaderboard shows the points of the most active fans.","Points come from the tier you choose: Bronze 200, Silver 500, Gold 1000."]},
+ {id:"b5",cat:"Interviews",title:"Nina Voss on composing for a trio and a string quartet",date:"5 October 2026",body:["Nina Voss describes how she writes for a trio first and arranges strings afterward, leaving space for the piano to breathe.","Her EP Quiet rooms is nearly funded, and she plans to release the final track to Gold backers first."]}
+];
+var FAQ=[
+ ["How do I fund a project?","Open a project, choose Bronze, Silver or Gold, enter an amount in that tier's range and press Proceed to payment."],
+ ["What do I get for backing?","Artist-grow points and access to the tracks your tier unlocks. Each artist chooses which tracks belong to which tier."],
+ ["How do royalties work?","Artists can share a percentage of a project's streaming royalties with backers, split in proportion to pledges. In this preview the figures are samples and no money is paid."],
+ ["How do I sell a song?","Open Studio, choose Put a song up for sale, set a price and the number of copies. Buyers see it on the Songs page. In this preview no payment is taken."],
+ ["How do song bids work?","Artists put a song on bid with a starting price and a duration. The highest bid when time runs out wins early access and the royalty share the artist set. In this preview no payment is taken."],
+ ["Can I back more than one project?","Yes. Each pledge is separate and appears in My support."],
+ ["How do I start a project?","Open Start a project, add your details, set a goal and length, and choose what each tier unlocks."],
+ ["How do I post an update to backers?","Open Studio, pick your project and write an update. Followers and backers are notified."],
+ ["Can I change what a tier unlocks?","Yes. In Studio, change the number of tracks per tier and set a release date."],
+ ["How do notifications work?","Turn update, launch and milestone alerts on or off in Account."],
+ ["I forgot my password.","Send us a message with the form on this page and include the email you signed up with."]
+];
+var BOARD=[["Chioma E.",2400],["Daniel K.",1900],["Priya S.",1450],["Tom R.",900],["Aisha M.",700]];
+
+/* ---------- state ---------- */
+var store=null;try{store=window.localStorage}catch(e){}
+function fresh(){return {follows:[],saves:[],pledges:[],points:0,notifs:[{id:"n0",type:"system",text:"Welcome to ArtistGrow. Follow artists and back projects to see activity here.",ts:Date.now(),read:false}],comments:{},updates:{},custom:[],msgs:[],sent:[],user:null,profile:{bio:"",spotify:"",instagram:"",twitter:""},prefs:{updates:true,launches:true,milestones:true},conn:{Google:false,Facebook:false,Spotify:false},over:{},likes:{},help:[],bids:{},songs:[],t0:Date.now(),buys:{},sales:[]}}
+var S=fresh();
+try{var raw=store&&store.getItem("ag-v2");if(raw){var o=JSON.parse(raw);for(var k in o)S[k]=o[k]}}catch(e){}
+if(!S.t0)S.t0=Date.now();if(!S.bids)S.bids={};if(!S.songs)S.songs=[];if(!S.buys)S.buys={};if(!S.sales)S.sales=[];
+function save(){try{store&&store.setItem("ag-v2",JSON.stringify(S))}catch(e){}}
+var IMGS={};var CUR={pid:"p1",aid:"ige",post:null,spid:"p1"};
+var F={q:"",genre:"All",sort:"new",price:"any",saved:false,ending:false};
+var FA={q:"",genre:"All",following:false};
+var BF="All";var FQ="";
+
+/* ---------- helpers ---------- */
+function $(s,r){return (r||document).querySelector(s)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
+function allP(){return P.concat(S.custom)}
+function pById(id){return allP().filter(function(p){return p.id===id})[0]}
+function aById(id){return A.filter(function(a){return a.id===id})[0]}
+function aname(p){return p.aname||(aById(p.aid)||{}).name||"Artist"}
+function tone(i){return tones[Math.abs(i)%tones.length]}
+function uri(s){return "data:image/svg+xml,"+encodeURIComponent(s)}
+function portrait(i){var t=tone(i),k=Math.abs(i);var hair=k%2?'<path d="M150 150c-10-70 100-70 100 0-20-25-80-25-100 0z" fill="#120d0d"/>':'<ellipse cx="200" cy="108" rx="52" ry="30" fill="#120d0d"/>';
+ return uri('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+t[0]+'"/><stop offset="1" stop-color="'+t[1]+'"/></linearGradient><radialGradient id="r" cx=".5" cy=".3" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="400" height="500" fill="url(#g)"/><rect width="400" height="500" fill="url(#r)"/><circle cx="'+(60+k*37%280)+'" cy="'+(80+k*53%120)+'" r="'+(50+k*9%40)+'" fill="#fff" opacity=".08"/><path d="M40 500c0-110 70-160 160-160s160 50 160 160z" fill="#120d0d" opacity=".88"/><rect x="178" y="300" width="44" height="60" rx="18" fill="#2a1d19"/><ellipse cx="200" cy="215" rx="58" ry="72" fill="#3a2823"/>'+hair+'</svg>')}
+function coverArt(i,wide){var t=tone(i),k=Math.abs(i),w=wide?1200:400,h=wide?300:440,cx=wide?w*.7:w/2,cy=h/2,rs="";for(var j=1;j<=6;j++)rs+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(j*(h*.07))+'" fill="none" stroke="#fff" stroke-opacity="'+(.34-j*.04)+'" stroke-width="2"/>';
+ var wv="";for(var q=0;q<4;q++)wv+='<path d="M0 '+(h*.62+q*h*.07)+'Q'+(w*.25)+' '+(h*.5+q*h*.07+k%3*14)+' '+(w*.5)+' '+(h*.62+q*h*.07)+'T'+w+' '+(h*.6+q*h*.07)+'" stroke="#fff" stroke-opacity="'+(.22-q*.04)+'" stroke-width="3" fill="none"/>';
+ return uri('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+t[0]+'"/><stop offset="1" stop-color="'+t[1]+'"/></linearGradient></defs><rect width="'+w+'" height="'+h+'" fill="url(#g)"/><circle cx="'+cx+'" cy="'+cy+'" r="'+(h*.34)+'" fill="#06300f" opacity=".55"/>'+rs+'<circle cx="'+cx+'" cy="'+cy+'" r="'+(h*.05)+'" fill="#1db954"/>'+wv+'</svg>')}
+function idxOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return i;return 0}
+function pledgesFor(id){return S.pledges.filter(function(x){return x.pid===id})}
+function raised(p){return p.raised+pledgesFor(p.id).reduce(function(s,x){return s+x.amount},0)}
+function backers(p){return p.backers+pledgesFor(p.id).length}
+function pct(p){return Math.min(100,Math.round(raised(p)/p.goal*100))}
+var ROY={p1:[20,1800],p2:[15,1400],p3:[25,3200],p4:[15,900],p5:[10,500],p6:[20,1100]};
+function roy(p){var o=S.over[p.id];return o&&o.roy!=null?o.roy:(ROY[p.id]?ROY[p.id][0]:10)}
+function rmo(p){return ROY[p.id]?ROY[p.id][1]:600}
+function rest(p,amt){return amt/p.goal*roy(p)/100*rmo(p)}
+function money2(n){return "$"+n.toFixed(2)}
+function roiHtml(p,amt){var rows=[["Low (half of sample)",.5],["Base (sample)",1],["High (1.5x sample)",1.5]].map(function(s){var m=rest(p,amt)*s[1],y=m*12;return '<tr><td>'+s[0]+'</td><td class="n">'+money2(y)+'</td><td class="n">'+(amt>0?Math.round(y/amt*100):0)+'%</td><td class="n">'+(m>0?(amt/m).toFixed(1)+' mo':'n/a')+'</td></tr>'}).join("");
+ return '<table class="tbl"><thead><tr><th>Scenario</th><th class="n">12-month royalties</th><th class="n">Return on pledge</th><th class="n">Break-even</th></tr></thead><tbody>'+rows+'</tbody></table><p class="stats" style="margin-top:10px">Returns are illustrations, not guarantees. You could earn nothing and not get your pledge back.</p>'}
+var SONGS=[
+ {id:"s1",title:"Last call (unreleased)",aid:"ige",start:100,inc:25,h:52,base:410,n:9,roy:5},
+ {id:"s2",title:"Porch light (live demo)",aid:"amara",start:150,inc:25,h:20,base:520,n:12,roy:4},
+ {id:"s3",title:"Detty (club remix)",aid:"tobi",start:200,inc:50,h:76,base:880,n:17,roy:8},
+ {id:"s4",title:"Slant light (solo piano)",aid:"nina",start:120,inc:20,h:5,base:260,n:6,roy:3}
+];
+function allSongs(){return S.songs.concat(SONGS)}
+function bstate(s){var b=S.bids[s.id];return {cur:b?b.cur:(s.base||s.start),n:(s.n||0)+(b?b.n:0),mine:b?b.mine:0}}
+function endTs(s){return s.end||(S.t0+s.h*3600000)}
+function left(s){var ms=endTs(s)-Date.now();if(ms<=0)return "Closed";var h=Math.floor(ms/3600000),d=Math.floor(h/24);return d>0?d+"d "+(h%24)+"h left":h+"h "+Math.floor(ms%3600000/60000)+"m left"}
+function minBid(s){var b=bstate(s);return b.n>0?b.cur+s.inc:s.start}
+function sname(s){var a=aById(s.aid);return s.aname||(a?a.name:"Artist")}
+function songCard(s){var b=bstate(s),closed=left(s)==="Closed",mn=minBid(s);
+ return '<article class="panel"><div class="mini" style="justify-content:space-between"><h3 style="margin:0">'+esc(s.title)+'</h3><span class="tag">'+left(s)+'</span></div><p class="stats">by <b>'+esc(sname(s))+'</b> · '+b.n+' bids · starting bid '+money(s.start)+'</p>'+
+ '<div class="tiles" style="margin-top:12px"><div class="tile"><b>'+money(b.cur)+'</b><span>Current bid</span></div><div class="tile"><b>'+s.roy+'%</b><span>Song royalty share (sample)</span></div></div>'+
+ '<p class="note left">The top bid wins early access, a credit and the royalty share above.</p>'+(b.mine?'<p><span class="badge">You are leading at '+money(b.mine)+'</span></p>':'')+
+ (closed?'<p class="note left">Bidding closed at '+money(b.cur)+'.</p>':'<form class="pledge" data-form="bid" data-id="'+s.id+'" novalidate style="justify-content:flex-start"><label for="bid-'+s.id+'">Your bid ($)<input class="in s" id="bid-'+s.id+'" type="number" min="'+mn+'" value="'+mn+'"></label><button class="btn sm" type="submit">Place bid</button></form><p class="note left" id="bn-'+s.id+'" role="status"></p>')+'</article>'}
+function bidsHtml(){var rows=allSongs().filter(function(s){return S.bids[s.id]&&S.bids[s.id].mine}).map(function(s){var b=bstate(s),c=left(s)==="Closed";return '<tr><td>'+esc(s.title)+'</td><td class="n">'+money(b.mine)+'</td><td>'+(c?"Closed (preview, no payment taken)":"Leading · "+left(s))+'</td></tr>'}).join("");
+ return rows?'<div class="scroll"><table class="tbl"><thead><tr><th>Song</th><th class="n">My bid</th><th>Status</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No bids yet. <a href="#bids" style="color:var(--green)">See songs on bid</a>.</p>'}
+var SALES=[
+ {id:"f1",title:"Home by dawn (full song)",aid:"ige",price:15,stock:100,sold:64},
+ {id:"f2",title:"Honey (acoustic version)",aid:"amara",price:9,stock:250,sold:171},
+ {id:"f3",title:"Pepper (extended mix)",aid:"tobi",price:12,stock:60,sold:58},
+ {id:"f4",title:"Interval (piano score and recording)",aid:"nina",price:20,stock:40,sold:12}
+];
+function allSales(){return S.sales.concat(SALES)}
+function remain(s){return Math.max(0,s.stock-s.sold-(S.buys[s.id]||0))}
+function saleCard(s){var r=remain(s),mine=S.buys[s.id]||0;
+ return '<article class="panel"><div class="mini" style="justify-content:space-between"><h3 style="margin:0">'+esc(s.title)+'</h3><span class="tag">For sale</span></div><p class="stats">by <b>'+esc(sname(s))+'</b></p>'+
+ '<div class="tiles" style="margin-top:12px"><div class="tile"><b>'+money2(s.price)+'</b><span>Price</span></div><div class="tile"><b>'+r+'</b><span>Copies left</span></div></div>'+
+ '<p class="note left">Buyers get the full song in their library.</p>'+(mine?'<p><span class="badge">You own '+mine+(mine>1?" copies":" copy")+'</span></p>':'')+
+ '<div class="toolbar">'+(r?'<button class="btn sm" data-act="buy" data-id="'+s.id+'">Buy now for '+money2(s.price)+'</button>':'<button class="btn sm" disabled>Sold out</button>')+'</div><p class="note left" id="sn-'+s.id+'" role="status"></p></article>'}
+function buysHtml(){var rows=allSales().filter(function(s){return S.buys[s.id]}).map(function(s){return '<tr><td>'+esc(s.title)+'</td><td>'+esc(sname(s))+'</td><td class="n">'+S.buys[s.id]+'</td><td class="n">'+money2(S.buys[s.id]*s.price)+'</td></tr>'}).join("");
+ return rows?'<div class="scroll"><table class="tbl"><thead><tr><th>Song</th><th>Artist</th><th class="n">Copies</th><th class="n">Paid (preview)</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No songs bought yet. <a href="#bids" style="color:var(--green)">See songs for sale</a>.</p>'}
+function sameDay(a,b){return new Date(a).toDateString()===new Date(b).toDateString()}
+function fdate(ts){return new Date(ts).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}
+function ftime(ts){return fdate(ts)+", "+new Date(ts).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}
+function me(){return S.user?S.user.name:"Guest"}
+function acc(p){return (S.over[p.id]&&S.over[p.id].access)||{Bronze:T.Bronze.tr,Silver:T.Silver.tr,Gold:p.tracks}}
+function rel(p){return (S.over[p.id]&&S.over[p.id].release)||""}
+function notify(type,text){if(type!=="system"&&S.prefs[type]===false)return;S.notifs.unshift({id:"n"+Date.now()+Math.random(),type:type,text:text,ts:Date.now(),read:false})}
+function unread(){return S.notifs.filter(function(n){return !n.read}).length}
+var IMG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M3 17l5-4 4 3 3-2 6 4"/></svg>';
+function bar(p){var v=pct(p);return '<div class="bar" role="progressbar" aria-label="Funding progress" aria-valuenow="'+v+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+v+'%"></i></div><div class="stats"><span><b>'+money(raised(p))+'</b> of '+money(p.goal)+' ('+v+'%)</span><span><b>'+backers(p)+'</b> backers</span><span><b>'+p.days+'</b> days left</span></div>'}
+function cover(p){var t=tone(idxOf(allP(),p.id)+2);return '<div class="cover" style="background:linear-gradient(160deg,'+t[0]+','+t[1]+')">'+'<img alt="" src="'+(IMGS[p.id]||coverArt(idxOf(allP(),p.id)+2,false))+'">'+'</div>'}
+function fol(id){return S.follows.indexOf(id)>-1}
+function sav(id){return S.saves.indexOf(id)>-1}
+function artistCard(a){var t=tone(idxOf(A,a.id));
+ return '<article class="artist"><div class="ph" style="background:linear-gradient(160deg,'+t[0]+','+t[1]+')"></div><img class="pimg" alt="" src="'+portrait(idxOf(A,a.id))+'"><div class="shade"></div><div class="cap"><h3>'+esc(a.name)+'</h3><div><span class="tag">'+esc(a.genre)+'</span></div><div class="btns"><button class="btn sm ghost" data-act="follow" data-id="'+a.id+'" aria-pressed="'+fol(a.id)+'">'+(fol(a.id)?"Following":"Follow")+'</button><button class="btn sm" data-act="artist" data-id="'+a.id+'">View profile</button></div></div></article>'}
+function projCard(p){
+ return '<article class="proj">'+cover(p)+'<div><div class="date">Release '+esc(p.date)+'</div><h3>'+esc(p.title)+' <small>by</small> <em>'+esc(aname(p))+'</em></h3><div class="tags"><span class="tag">'+esc(p.genre)+'</span><span class="tag">'+p.tracks+' TRACKS</span><span class="tag">'+esc(p.type)+'</span><span class="tag" style="background:#fff;color:#0d6b2e;font-weight:700">'+roy(p)+'% ROYALTY SHARE</span></div>'+bar(p)+'<p style="margin-top:14px">'+esc(p.desc)+'</p><div class="acts2"><button class="btn" data-act="project" data-id="'+p.id+'">Fund a project</button><button class="btn ghost sm" data-act="save" data-id="'+p.id+'" aria-pressed="'+sav(p.id)+'">'+(sav(p.id)?"Saved":"Save")+'</button></div></div></article>'}
+function go(name){if(location.hash==="#"+name)route(true);else location.hash=name}
+
+/* ---------- preview audio ---------- */
+var AC=null,PV=null;
+function stopPreview(){if(PV){clearInterval(PV.t);try{PV.nodes.forEach(function(n){n.stop()})}catch(e){}PV=null}document.querySelectorAll(".trk .pb i").forEach(function(i){i.style.width="0"});document.querySelectorAll("[data-act=play]").forEach(function(b){b.textContent="Preview"})}
+function play(btn,idx){var same=PV&&PV.idx===idx;stopPreview();if(same)return;
+ try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.resume)AC.resume();
+  var base=[220,247,262,294,330,349][idx%6],steps=[0,4,7,12,7,4],now=AC.currentTime,dur=12,nodes=[],i;
+  for(i=0;i<dur*2;i++){var o=AC.createOscillator(),g=AC.createGain();o.type="triangle";o.frequency.value=base*Math.pow(2,steps[i%6]/12);g.gain.setValueAtTime(0.0001,now+i*.5);g.gain.exponentialRampToValueAtTime(.12,now+i*.5+.04);g.gain.exponentialRampToValueAtTime(.0001,now+i*.5+.45);o.connect(g);g.connect(AC.destination);o.start(now+i*.5);o.stop(now+i*.5+.5);nodes.push(o)}
+  var fill=btn.closest(".t").querySelector(".pb i"),t0=Date.now();
+  btn.textContent="Stop";PV={idx:idx,nodes:nodes,t:setInterval(function(){var f=(Date.now()-t0)/(dur*1000);if(f>=1){stopPreview();return}fill.style.width=Math.round(f*100)+"%"},120)};
+ }catch(e){btn.textContent="Preview unavailable"}}
+
+/* ---------- pages ---------- */
+var R={};
+function home(){
+ $("#h-artists").innerHTML=A.slice(0,2).map(artistCard).join("");
+ $("#h-projects").innerHTML=allP().filter(function(p){return !p.mine}).slice(0,2).map(projCard).join("");
+}
+R.home=home;
+
+function projList(){var q=F.q.toLowerCase();
+ var l=allP().filter(function(p){
+  if(F.genre!=="All"&&p.genre!==F.genre)return false;
+  if(F.saved&&!sav(p.id))return false;
+  if(F.ending&&p.days>14)return false;
+  if(F.price==="u100"&&p.min>=100)return false;
+  if(F.price==="o100"&&p.min<100)return false;
+  if(q&&(p.title+" "+aname(p)+" "+p.genre).toLowerCase().indexOf(q)<0)return false;return true});
+ l.sort(function(a,b){if(F.sort==="funded")return pct(b)-pct(a);if(F.sort==="ending")return a.days-b.days;return b.ord-a.ord});
+ $("#plist").innerHTML=l.length?l.map(projCard).join(""):'<p class="note">No projects match these filters.</p>'}
+R.projects=function(){var el=$('[data-page="projects"]');
+ el.innerHTML='<div class="wrap sec"><div class="search"><input id="qp" type="search" placeholder="Search for projects" aria-label="Search projects" value="'+esc(F.q)+'"><button class="go" type="button" aria-label="Search"><svg width="30" height="30"><use href="#srch"/></svg></button></div>'+
+ '<div class="chips" role="group" aria-label="Filter by genre">'+["All"].concat(GENRES).map(function(g){return '<button class="btn ghost sm" data-act="pgenre" data-g="'+esc(g)+'" aria-pressed="'+(F.genre===g)+'">'+esc(g)+'</button>'}).join("")+'</div>'+
+ '<div class="chips"><select id="psort" aria-label="Sort"><option value="new">Newest</option><option value="funded">Most funded</option><option value="ending">Ending soon</option></select><select id="pprice" aria-label="Starting pledge"><option value="any">Any starting pledge</option><option value="u100">Under $100</option><option value="o100">$100 and up</option></select><button class="btn ghost sm" data-act="pending" aria-pressed="'+F.ending+'">Ending soon</button><button class="btn ghost sm" data-act="psaved" aria-pressed="'+F.saved+'">Saved only</button></div>'+
+ '<div id="plist"></div></div>';
+ $("#psort").value=F.sort;$("#pprice").value=F.price;projList()};
+
+function artList(){var q=FA.q.toLowerCase();
+ var l=A.filter(function(a){return (FA.genre==="All"||a.genre===FA.genre)&&(!FA.following||fol(a.id))&&(!q||(a.name+" "+a.genre+" "+a.loc).toLowerCase().indexOf(q)>-1)});
+ $("#alist").innerHTML=l.length?l.map(artistCard).join(""):'<p class="note" style="grid-column:1/-1">No artists match.</p>'}
+R.artists=function(){var el=$('[data-page="artists"]');
+ el.innerHTML='<div class="wrap sec"><div class="search"><input id="qa" type="search" placeholder="Search for your favourite artists" aria-label="Search artists" value="'+esc(FA.q)+'"><button class="go" type="button" aria-label="Search"><svg width="30" height="30"><use href="#srch"/></svg></button></div>'+
+ '<div class="chips" role="group" aria-label="Filter by genre">'+["All"].concat(GENRES).map(function(g){return '<button class="btn ghost sm" data-act="agenre" data-g="'+esc(g)+'" aria-pressed="'+(FA.genre===g)+'">'+esc(g)+'</button>'}).join("")+'<button class="btn ghost sm" data-act="afollowing" aria-pressed="'+FA.following+'">Following only ('+S.follows.length+')</button></div>'+
+ '<div class="agrid" id="alist"></div></div>';artList()};
+
+R.artist=function(){var a=aById(CUR.aid)||A[0],i=idxOf(A,a.id),t=tone(i),ps=allP().filter(function(p){return p.aid===a.id});
+ $('[data-page="artist"]').innerHTML='<div class="wrap sec"><button class="btn ghost sm" data-act="nav" data-to="artists">← All artists</button>'+
+ '<div class="grid2" style="margin-top:28px;align-items:start"><div class="artist" style="aspect-ratio:4/5"><div class="ph" style="background:linear-gradient(160deg,'+t[0]+','+t[1]+')"></div><img class="pimg" alt="" src="'+portrait(i)+'"></div>'+
+ '<div><h2 class="eyebrow" style="font-size:clamp(32px,5vw,45px)">'+esc(a.name)+'</h2><div class="tags"><span class="tag">'+esc(a.genre)+'</span><span class="tag">'+esc(a.loc)+'</span></div><p style="line-height:1.9">'+esc(a.bio)+'</p>'+
+ '<p class="stats"><span>Spotify · Instagram · Twitter</span><span>(sample profile)</span></p>'+
+ '<div class="toolbar"><button class="btn" data-act="follow" data-id="'+a.id+'" aria-pressed="'+fol(a.id)+'">'+(fol(a.id)?"Following":"Follow")+'</button></div>'+
+ '<form class="panel" data-form="msg" data-id="'+a.id+'"><h3>Message '+esc(a.name)+'</h3><label class="lab" for="mt">Your message<textarea class="in s" id="mt" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Send message</button></div><p class="note left" id="mnote" role="status"></p></form></div></div>'+
+ '<h3 class="eyebrow" style="font-size:26px;margin-top:48px">Projects by '+esc(a.name)+'</h3>'+(ps.length?ps.map(projCard).join(""):'<p class="empty">No projects yet.</p>')+'</div>'};
+
+R.fund=function(){var p=pById(CUR.pid)||P[0],i=idxOf(allP(),p.id),a=acc(p),rd=rel(p),sel=CUR.tier||"Silver",tt=T[sel];
+ var shareUrl=encodeURIComponent(location.href.split("#")[0]),txt=encodeURIComponent("Back "+p.title+" by "+aname(p)+" on ArtistGrow");
+ var trk=p.tl.map(function(n,k){var tiers=a.Bronze>k?"Bronze+":a.Silver>k?"Silver+":a.Gold>k?"Gold":"Not in a tier";return '<div class="t"><button class="btn sm" data-act="play" data-i="'+k+'" aria-label="Preview '+esc(n)+'">Preview</button><div><div>'+(k+1)+'. '+esc(n)+'</div><div class="pb"><i></i></div></div><span class="lk">'+tiers+'</span><span class="lk">Sample clip</span></div>'}).join("");
+ var ups=(S.updates[p.id]||[]).map(function(u,k){var lk=S.likes[p.id+":"+k];return '<div class="fi"><div class="m">'+esc(u.who)+' · '+ftime(u.ts)+'</div><p>'+esc(u.text)+'</p><div><button class="btn ghost sm" data-act="like" data-pid="'+p.id+'" data-k="'+k+'" aria-pressed="'+!!lk+'">'+(lk?"Liked":"Like")+' ('+((u.likes||0)+(lk?1:0))+')</button></div></div>'}).join("")||'<p class="empty">No updates yet. The artist can post from Studio.</p>';
+ var cms=(S.comments[p.id]||[]).map(function(c){return '<div class="comment"><b>'+esc(c.who)+'</b><small>'+ftime(c.ts)+'</small><p style="margin:6px 0 0">'+esc(c.text)+'</p></div>'}).join("")||'<p class="empty">Be the first to leave a message for the artist.</p>';
+ var t=tone(i+2);
+ $('[data-page="fund"]').innerHTML='<div class="wrap"><div class="banner" style="background:linear-gradient(160deg,'+t[0]+','+t[1]+')">'+'<img alt="" src="'+(IMGS[p.id]||coverArt(i+2,true))+'">'+'</div>'+
+ '<div class="fund-h"><h2>'+esc(p.title)+'</h2><div class="by">by <button data-act="artist" data-id="'+(p.aid==="me"?"ige":p.aid)+'"'+(p.aid==="me"?" disabled":"")+'>'+esc(aname(p))+'</button></div><span>Release '+esc(p.date)+'</span></div>'+
+ '<div class="tags"><span class="tag">'+esc(p.genre)+'</span><span class="tag">'+p.tracks+' TRACKS</span><span class="tag">'+esc(p.type)+'</span></div>'+bar(p)+
+ '<div class="toolbar"><button class="btn ghost sm" data-act="save" data-id="'+p.id+'" aria-pressed="'+sav(p.id)+'">'+(sav(p.id)?"Saved":"Save")+'</button>'+(p.aid!=="me"?'<button class="btn ghost sm" data-act="follow" data-id="'+p.aid+'" aria-pressed="'+fol(p.aid)+'">'+(fol(p.aid)?"Following":"Follow artist")+'</button>':'')+'<button class="btn ghost sm" data-act="copy">Copy link</button><a class="btn ghost sm" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text='+txt+'&url='+shareUrl+'">Share on X</a><a class="btn ghost sm" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+shareUrl+'">Share on Facebook</a></div><p class="note left" id="cnote" role="status"></p>'+
+ '<div class="roy-call"><b>'+roy(p)+'%</b> of this project\'s streaming royalties are shared with its backers, in proportion to their pledges. See estimates below.</div><p class="lead">'+esc(p.desc)+'</p>'+
+ '<h3 class="eyebrow" style="font-size:24px;margin-top:20px">Tracks</h3><div class="trk">'+trk+'</div>'+(rd?'<p class="note left">Tier tracks unlock on '+esc(rd)+'.</p>':'')+
+ '<h3 class="eyebrow" style="font-size:24px;margin-top:32px">Choose a tier</h3>'+
+ '<div class="tiers" role="group" aria-label="Funding tiers">'+["Bronze","Silver","Gold"].map(function(n){var x=T[n];return '<button class="tier" type="button" data-act="tier" data-t="'+n+'" aria-pressed="'+(sel===n)+'"><span class="nm">'+n+'</span><ul><li>Get '+x.pts+' artist-grow points</li><li>Access to '+(a[n]>=p.tracks?"all":a[n])+' tracks on the '+(p.type==="ALBUM"?"album":"project")+'</li><li>Share of the '+roy(p)+'% royalty pool</li></ul><span class="pr">'+x.label+'</span></button>'}).join("")+'</div>'+
+ '<form class="pledge" data-form="pledge" novalidate><label for="pamt">Pledge amount ($)<input class="in s" id="pamt" type="number" min="'+tt.min+'" max="'+tt.max+'" value="'+(CUR.amt||tt.min)+'"></label><button class="btn sq" type="submit">PROCEED TO PAYMENT</button></form>'+
+ '<p class="note" id="paynote" role="status">'+(CUR.pnote||(sel+" tier selected. Enter "+tt.label.replace(/ - /," to ")+"."))+'</p>'+
+ '<div class="panel" style="max-width:1100px;margin:24px auto;border-color:var(--green)"><h3>Royalty share and return (preview)</h3><p class="stats" style="font-size:15px;line-height:1.8">Backers share <b>'+roy(p)+'%</b> of this project\'s streaming royalties, split in proportion to what each backer pledged. Based on sample royalties of '+money(rmo(p))+' a month, a <span id="royamt">'+money(CUR.amt||tt.min)+'</span> pledge would earn about <b id="royest">'+money2(rest(p,CUR.amt||tt.min))+'</b> a month. These are sample figures, not a promise: real royalties depend on streams, and paying them out would need legal review.</p><div id="roitab" class="scroll">'+roiHtml(p,CUR.amt||tt.min)+'</div></div>'+
+ '<div class="grid2"><div class="panel"><h3>Updates from the artist</h3><div class="feed">'+ups+'</div></div>'+
+ '<div class="panel"><h3>Messages</h3>'+cms+'<form data-form="comment" data-id="'+p.id+'" style="margin-top:14px"><label class="lab" for="ct">Leave a message<textarea class="in s" id="ct" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Post message</button></div></form></div></div></div>'};
+
+function badges(){var ps=S.pledges,l=[
+ ["First backer",ps.length>0],["Early supporter",ps.some(function(x){return x.early})],["Gold backer",ps.some(function(x){return x.tier==="Gold"})],["Super fan (3+ projects)",new Set(ps.map(function(x){return x.pid})).size>=3],["Follower (3+ artists)",S.follows.length>=3]];
+ return l.map(function(b){return '<span class="badge'+(b[1]?"":" off")+'">'+b[0]+(b[1]?"":" (locked)")+'</span>'}).join("")}
+R.dashboard=function(){var total=S.pledges.reduce(function(s,x){return s+x.amount},0),ids=[];S.pledges.forEach(function(x){if(ids.indexOf(x.pid)<0)ids.push(x.pid)});
+ var board=BOARD.concat([[me()+" (you)",S.points]]).sort(function(a,b){return b[1]-a[1]});
+ var backed=S.pledges.slice().reverse().map(function(x){var p=pById(x.pid);if(!p)return "";var n=Math.min(acc(p)[x.tier],p.tracks),r=rel(p),locked=r&&new Date(r)>new Date();
+  return '<tr><td><button class="btn ghost sm" data-act="project" data-id="'+p.id+'">'+esc(p.title)+'</button></td><td>'+x.tier+'</td><td class="n">'+money(x.amount)+'</td><td>'+(locked?"Unlocks "+esc(r):esc(p.tl.slice(0,n).join(", ")))+'</td><td class="n">'+money2(rest(p,x.amount))+'</td><td>'+fdate(x.ts)+'</td></tr>'}).join("");
+ $('[data-page="dashboard"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">My support</h2><p class="sub">Welcome, '+esc(me())+'.</p>'+
+ '<div class="tiles"><div class="tile"><b>'+ids.length+'</b><span>Projects backed</span></div><div class="tile"><b>'+money(total)+'</b><span>Total pledged</span></div><div class="tile"><b>'+S.points+'</b><span>Artist-grow points</span></div><div class="tile"><b>'+S.follows.length+'</b><span>Artists followed</span></div><div class="tile"><b>'+money2(S.pledges.reduce(function(s,x){var q=pById(x.pid);return s+(q?rest(q,x.amount):0)},0))+'</b><span>Est. royalties / month (sample)</span></div></div>'+
+ '<div class="panel"><h3>Badges</h3>'+badges()+'</div>'+
+ '<div class="panel"><h3>Projects you backed</h3>'+(backed?'<div class="scroll"><table class="tbl"><thead><tr><th>Project</th><th>Tier</th><th class="n">Amount</th><th>Unlocked tracks</th><th class="n">Est. royalties / mo</th><th>Date</th></tr></thead><tbody>'+backed+'</tbody></table></div>':'<p class="empty">You have not backed a project yet. <a href="#projects" style="color:var(--green)">Browse projects</a>.</p>')+'</div>'+
+ '<div class="grid2"><div class="panel"><h3>Saved projects</h3>'+(S.saves.length?S.saves.map(function(id){var p=pById(id);return p?'<p><button class="btn ghost sm" data-act="project" data-id="'+p.id+'">'+esc(p.title)+'</button> <span class="stats">'+pct(p)+'% funded</span></p>':""}).join(""):'<p class="empty">Nothing saved yet.</p>')+'</div>'+
+ '<div class="panel"><h3>Artists you follow</h3>'+(S.follows.length?S.follows.map(function(id){var a=aById(id);return a?'<p><button class="btn ghost sm" data-act="artist" data-id="'+a.id+'">'+esc(a.name)+'</button></p>':""}).join(""):'<p class="empty">You are not following anyone yet.</p>')+'</div></div>'+
+ '<div class="panel"><h3>Songs I bought</h3>'+buysHtml()+'</div>'+
+ '<div class="panel"><h3>My bids</h3>'+bidsHtml()+'</div>'+
+ '<div class="panel"><h3>Points leaderboard</h3><div class="scroll"><table class="tbl"><thead><tr><th>#</th><th>Backer</th><th class="n">Points</th></tr></thead><tbody>'+board.map(function(r,i){return '<tr'+(r[0].indexOf("(you)")>-1?' class="me"':"")+'><td>'+(i+1)+'</td><td>'+esc(r[0])+'</td><td class="n">'+r[1]+'</td></tr>'}).join("")+'</tbody></table></div></div></div>'};
+
+function mine(){return [P[0]].concat(S.custom)}
+function hist(p){var h=p.hist.slice(0,6).concat([p.hist[6]+pledgesFor(p.id).filter(function(x){return sameDay(x.ts,Date.now())}).reduce(function(s,x){return s+x.amount},0)]);return h}
+function chart(p){var h=hist(p),mx=Math.max.apply(null,h.concat([100])),st=Math.pow(10,Math.floor(Math.log(mx)/Math.LN10)),top=Math.ceil(mx/st)*st,W=600,H=240,L=56,B=28,Tp=12,bw=(W-L-10)/7,s='',i;
+ [0,top/2,top].forEach(function(v){var y=Tp+(H-B-Tp)*(1-v/top);s+='<line x1="'+L+'" x2="'+(W-6)+'" y1="'+y+'" y2="'+y+'" stroke="#fff" stroke-opacity=".15"/><text x="'+(L-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#b9b4b4">'+money(v)+'</text>'});
+ for(i=0;i<7;i++){var d=new Date(Date.now()-(6-i)*864e5),bh=(H-B-Tp)*h[i]/top,x=L+i*bw+bw*.18;s+='<rect x="'+x+'" y="'+(H-B-bh)+'" width="'+bw*.64+'" height="'+bh+'" fill="#1db954"'+(i===6?"":' fill-opacity=".75"')+'/><text x="'+(x+bw*.32)+'" y="'+(H-10)+'" text-anchor="middle" font-size="11" fill="#b9b4b4">'+d.toLocaleDateString("en-GB",{weekday:"short"})+'</text>'}
+ return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Funding per day for the last 7 days">'+s+'</svg>'}
+function tierSplit(p){var c={Bronze:p.cnt.Bronze,Silver:p.cnt.Silver,Gold:p.cnt.Gold};pledgesFor(p.id).forEach(function(x){c[x.tier]++});var tot=c.Bronze+c.Silver+c.Gold||1,cols={Bronze:"#1f7e40",Silver:"#1db954",Gold:"#7dff9f"};
+ return '<div style="display:flex;height:22px;border-radius:5px;overflow:hidden;margin:8px 0">'+["Bronze","Silver","Gold"].map(function(k){return '<i style="width:'+(c[k]/tot*100)+'%;background:'+cols[k]+'"></i>'}).join("")+'</div><div class="stats">'+["Bronze","Silver","Gold"].map(function(k){return '<span><b>'+c[k]+'</b> '+k+' ('+Math.round(c[k]/tot*100)+'%)</span>'}).join("")+'</div>'}
+R.studio=function(){var l=mine(),p=pById(CUR.spid)||l[0];CUR.spid=p.id;var a=acc(p),c={Bronze:p.cnt.Bronze,Silver:p.cnt.Silver,Gold:p.cnt.Gold};pledgesFor(p.id).forEach(function(x){c[x.tier]++});
+ var ups=(S.updates[p.id]||[]).map(function(u){return '<div class="fi"><div class="m">'+ftime(u.ts)+'</div><p>'+esc(u.text)+'</p></div>'}).join("")||'<p class="empty">No updates posted.</p>';
+ var sent=S.sent.filter(function(m){return m.pid===p.id}).map(function(m){return '<div class="fi"><div class="m">To '+esc(m.to)+' · '+ftime(m.ts)+'</div><p>'+esc(m.text)+'</p></div>'}).join("")||'<p class="empty">No messages sent.</p>';
+ var inbox=S.msgs.filter(function(m){return m.aid===p.aid||p.aid==="me"&&false}).map(function(m){return '<div class="fi"><div class="m">From '+esc(m.from)+' · '+ftime(m.ts)+'</div><p>'+esc(m.text)+'</p></div>'}).join("")||'<p class="empty">No fan messages yet.</p>';
+ $('[data-page="studio"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Studio</h2><p class="sub">Manage your project, backers and analytics.</p>'+
+ '<div class="toolbar"><label class="lab" for="spick">Project<select class="in s" id="spick">'+l.map(function(x){return '<option value="'+x.id+'"'+(x.id===p.id?" selected":"")+'>'+esc(x.title)+(x.id==="p1"?" (sample project)":"")+'</option>'}).join("")+'</select></label><a class="btn sm" href="#start" style="align-self:end">Start another project</a><a class="btn ghost sm" href="#account" style="align-self:end">Edit artist profile</a></div>'+
+ '<div class="panel"><h3>Progress</h3>'+bar(p)+'</div>'+
+ '<div class="grid2"><form class="panel" data-form="update" data-id="'+p.id+'"><h3>Post an update</h3><label class="lab" for="ut">Update for backers and followers<textarea class="in s" id="ut" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Post update</button></div><p class="note left" id="unote" role="status"></p></form>'+
+ '<form class="panel" data-form="blast" data-id="'+p.id+'"><h3>Message backers</h3><label class="lab" for="bt">Send to<select class="in s" id="bt"><option>All backers</option><option>Bronze</option><option>Silver</option><option>Gold</option></select></label><label class="lab" for="bm" style="margin-top:10px">Message<textarea class="in s" id="bm" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Send message</button></div><p class="note left" id="bnote" role="status">Backers: Bronze '+c.Bronze+', Silver '+c.Silver+', Gold '+c.Gold+'.</p></form></div>'+
+ '<form class="panel" data-form="access" data-id="'+p.id+'"><h3>Control access</h3><p class="stats">Choose how many tracks each tier unlocks, and when they unlock. Project has '+p.tracks+' tracks.</p><div class="fgrid">'+["Bronze","Silver","Gold"].map(function(k){return '<label class="lab" for="ac'+k+'">'+k+' tracks<input class="in s" id="ac'+k+'" type="number" min="0" max="'+p.tracks+'" value="'+Math.min(a[k],p.tracks)+'"></label>'}).join("")+'<label class="lab" for="acy">Royalty share to backers (%)<input class="in s" id="acy" type="number" min="0" max="50" value="'+roy(p)+'"></label><label class="lab" for="acr">Release date (optional)<input class="in s" id="acr" type="date" value="'+esc(rel(p))+'"></label></div><div class="toolbar"><button class="btn sm" type="submit">Save access</button></div><p class="note left" id="anote" role="status"></p></form>'+
+ '<form class="panel" data-form="sale"><h3>Put a song up for sale</h3><div class="fgrid"><label class="lab" for="slt">Song title<input class="in s" id="slt" required></label><label class="lab" for="slp">Price ($)<input class="in s" id="slp" type="number" min="1" value="10"></label><label class="lab" for="slc">Copies available<input class="in s" id="slc" type="number" min="1" value="100"></label></div><div class="toolbar"><button class="btn sm" type="submit">List song for sale</button><a class="btn ghost sm" href="#bids">See all songs</a></div><p class="note left" id="slnote" role="status"></p></form>'+
+ '<form class="panel" data-form="song"><h3>Put a song on bid</h3><div class="fgrid"><label class="lab" for="sgt">Song title<input class="in s" id="sgt" required></label><label class="lab" for="sgs">Starting bid ($)<input class="in s" id="sgs" type="number" min="1" value="100"></label><label class="lab" for="sgd">Duration (days)<input class="in s" id="sgd" type="number" min="1" max="30" value="7"></label><label class="lab" for="sgr">Song royalty share to winner (%)<input class="in s" id="sgr" type="number" min="0" max="50" value="5"></label></div><div class="toolbar"><button class="btn sm" type="submit">Place song on bid</button><a class="btn ghost sm" href="#bids">See all songs on bid</a></div><p class="note left" id="sgnote" role="status"></p></form>'+
+ '<div class="panel"><h3>Analytics</h3><p class="stats">Funding in the last 7 days. Daily history before today is sample data; pledges you make here are added to today.</p>'+chart(p)+'<div class="grid2" style="margin-top:18px"><div><h3 style="font-size:16px">Backers by tier</h3>'+tierSplit(p)+'</div><div><h3 style="font-size:16px">Where visitors come from (sample)</h3>'+Object.keys(SRC).map(function(k){return '<div class="stats" style="justify-content:space-between"><span>'+k+'</span><span><b>'+SRC[k]+'%</b></span></div><div class="bar"><i style="width:'+SRC[k]+'%"></i></div>'}).join("")+'</div></div></div>'+
+ '<div class="grid2"><div class="panel"><h3>Posted updates</h3><div class="feed">'+ups+'</div></div><div class="panel"><h3>Messages sent</h3><div class="feed">'+sent+'</div></div></div>'+
+ '<div class="panel"><h3>Fan messages</h3><div class="feed">'+inbox+'</div></div></div>'};
+
+R.account=function(){var u=S.user||{name:"",email:""},pr=S.profile;
+ $('[data-page="account"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Account</h2>'+(S.user?"":'<p class="sub">You are browsing as a guest. <a href="#signin" style="color:var(--green)">Sign in</a> to save your name.</p>')+
+ '<form class="panel" data-form="profile"><h3>Profile</h3><div class="fgrid"><label class="lab" for="pn1">Name<input class="in s" id="pn1" value="'+esc(u.name)+'" autocomplete="name"></label><label class="lab" for="pe1">Email<input class="in s" id="pe1" type="email" value="'+esc(u.email)+'" autocomplete="email"></label></div>'+
+ '<label class="lab" for="pb1" style="margin-top:12px">Artist bio<textarea class="in s" id="pb1">'+esc(pr.bio)+'</textarea></label><div class="fgrid"><label class="lab" for="ps1">Spotify<input class="in s" id="ps1" value="'+esc(pr.spotify)+'" placeholder="Spotify profile link"></label><label class="lab" for="pi1">Instagram<input class="in s" id="pi1" value="'+esc(pr.instagram)+'" placeholder="@handle"></label><label class="lab" for="pt1">Twitter<input class="in s" id="pt1" value="'+esc(pr.twitter)+'" placeholder="@handle"></label></div><div class="toolbar"><button class="btn sm" type="submit">Save profile</button></div><p class="note left" id="prnote" role="status"></p></form>'+
+ '<form class="panel" data-form="prefs"><h3>Notifications</h3>'+[["updates","Updates from artists I follow or back"],["launches","New project launches"],["milestones","Funding milestones (25%, 50%, 75%, 100%)"]].map(function(x){return '<label class="mini" style="margin:8px 0"><input type="checkbox" id="pf-'+x[0]+'"'+(S.prefs[x[0]]!==false?" checked":"")+'> '+x[1]+'</label>'}).join("")+'<div class="toolbar"><button class="btn sm" type="submit">Save preferences</button></div><p class="note left" id="pfnote" role="status"></p></form>'+
+ '<div class="panel"><h3>Connected accounts</h3><div class="mini">'+["Google","Facebook","Spotify"].map(function(k){return '<button class="btn ghost sm" data-act="conn" data-p="'+k+'" aria-pressed="'+!!S.conn[k]+'">'+k+': '+(S.conn[k]?"Connected":"Not connected")+'</button>'}).join("")+'</div></div>'+
+ '<div class="panel"><h3>Session</h3><div class="mini">'+(S.user?'<button class="btn ghost sm" data-act="signout">Sign out</button>':'<a class="btn sm" href="#signin">Sign in</a>')+'<button class="btn ghost sm" data-act="reset">Reset all demo data</button></div><p class="note left">Everything on this site is saved in this browser only.</p></div></div>'};
+
+R.notifications=function(){var l=S.notifs.map(function(n){return '<div class="fi'+(n.read?"":" unread")+'"><div class="m">'+ftime(n.ts)+' · '+esc(n.type)+'</div><p>'+esc(n.text)+'</p></div>'}).join("")||'<p class="empty">No notifications.</p>';
+ $('[data-page="notifications"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Notifications</h2><div class="toolbar"><button class="btn sm" data-act="readall">Mark all read</button><button class="btn ghost sm" data-act="clearn">Clear all</button><a class="btn ghost sm" href="#account">Preferences</a></div><div class="feed">'+l+'</div></div>'};
+
+function faqList(){var q=FQ.toLowerCase(),l=FAQ.filter(function(f){return !q||(f[0]+" "+f[1]).toLowerCase().indexOf(q)>-1});
+ $("#flist").innerHTML=l.length?l.map(function(f){return '<details class="faq"><summary>'+esc(f[0])+'</summary><p>'+esc(f[1])+'</p></details>'}).join(""):'<p class="empty">No answers match. Send us a message below.</p>'}
+R.help=function(){$('[data-page="help"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Help center</h2><p class="sub">Search answers or contact the team.</p><div class="search" style="margin-top:28px"><input id="qf" type="search" placeholder="Search help articles" aria-label="Search help" value="'+esc(FQ)+'"><button class="go" type="button" aria-label="Search"><svg width="30" height="30"><use href="#srch"/></svg></button></div><div id="flist" style="max-width:900px;margin:20px auto 0"></div>'+
+ '<form class="panel" data-form="help" style="max-width:900px;margin:36px auto 0"><h3>Contact us</h3><div class="fgrid"><label class="lab" for="hn">Name<input class="in s" id="hn" value="'+esc(S.user?S.user.name:"")+'"></label><label class="lab" for="he">Email<input class="in s" id="he" type="email" value="'+esc(S.user?S.user.email:"")+'"></label></div><label class="lab" for="hm" style="margin-top:12px">Message<textarea class="in s" id="hm" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Send message</button></div><p class="note left" id="hnote" role="status"></p></form></div>';faqList()};
+
+R.blog=function(){var cur=CUR.post&&BLOG.filter(function(b){return b.id===CUR.post})[0],h='<div class="wrap sec" style="max-width:900px"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Blog</h2><p class="sub">Artist interviews and announcements (sample articles).</p>';
+ if(cur){h+='<div class="toolbar"><button class="btn ghost sm" data-act="post" data-id="">← All posts</button></div><article class="post"><span class="cat">'+esc(cur.cat)+'</span><h3>'+esc(cur.title)+'</h3><span class="stats">'+esc(cur.date)+'</span>'+cur.body.map(function(b){return '<p>'+esc(b)+'</p>'}).join("")+'</article>'}
+ else{h+='<div class="chips" style="justify-content:flex-start">'+["All","Interviews","Announcements"].map(function(c){return '<button class="btn ghost sm" data-act="bcat" data-c="'+c+'" aria-pressed="'+(BF===c)+'">'+c+'</button>'}).join("")+'</div>'+BLOG.filter(function(b){return BF==="All"||b.cat===BF}).map(function(b){return '<article class="post"><span class="cat">'+esc(b.cat)+'</span><h3>'+esc(b.title)+'</h3><span class="stats">'+esc(b.date)+'</span><p>'+esc(b.body[0])+'</p><div><button class="btn sm" data-act="post" data-id="'+b.id+'">Read article</button></div></article>'}).join("")}
+ $('[data-page="blog"]').innerHTML=h+'</div>'};
+
+R.bids=function(){$('[data-page="bids"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Songs</h2><p class="sub">Buy a song outright or bid for early access and a share of its royalties.</p><p class="note left">Preview only: sales and bids are samples, no payment is taken, and royalty sharing would need legal review.</p>'+
+ '<h3 class="eyebrow" style="font-size:26px;margin-top:32px">For sale</h3><div class="grid2" style="margin-top:16px">'+allSales().map(saleCard).join("")+'</div>'+
+ '<h3 class="eyebrow" style="font-size:26px;margin-top:48px">On bid</h3><div class="grid2" style="margin-top:16px">'+allSongs().map(songCard).join("")+'</div></div>'};
+
+R.about=function(){$('[data-page="about"]').innerHTML='<div class="wrap sec" style="max-width:900px"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">About ArtistGrow</h2><p class="sub">A way for fans to help the artists they love release their next project.</p>'+
+ '<div class="why" style="text-align:left"><article style="text-align:left"><h3>Our idea</h3><p>Artists set a goal and tiers. Fans pledge to the tier they like and receive points and track access in return.</p></article><article style="text-align:left"><h3>For fans</h3><p>Follow artists, preview tracks, back projects and keep track of what you have unlocked.</p></article><article style="text-align:left"><h3>For artists</h3><p>Run a campaign, talk to backers, control who hears what and watch the numbers.</p></article></div>'+
+ '<div class="row" style="margin-top:40px"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a><a class="btn alt" href="#help">Contact us</a></div></div>'};
+
+/* ---------- routing ---------- */
+var NAMES=["home","how-it-works","artists","artist","projects","fund","start","signin","dashboard","studio","account","notifications","help","blog","about","bids"];
+function menu(){$("#pop").innerHTML=(S.user?'<div class="who">Signed in as '+esc(S.user.name)+'</div>':'<div class="who">Browsing as guest</div>')+'<a href="#dashboard">My support</a><a href="#studio">Studio</a><a href="#account">Account</a><a href="#notifications">Notifications</a><a href="#help">Help</a>'+(S.user?'<button data-act="signout">Sign out</button>':'<a href="#signin">Sign in</a><a href="#signup">Sign up</a>')}
+function chrome(h){var c=unread(),b=$("#bct");b.hidden=!c;b.textContent=c>99?"99+":c;
+ document.querySelectorAll("nav.top a[data-r]").forEach(function(a){a.classList.toggle("on",a.dataset.r===h||(h==="fund"&&a.dataset.r==="projects")||(h==="artist"&&a.dataset.r==="artists"))});menu()}
+function route(keep){var h=(location.hash||"#home").slice(1);if(h==="signup")h="signin";if(NAMES.indexOf(h)<0)h="home";
+ stopPreview();var m=$("#menu");if(m)m.removeAttribute("open");
+ document.querySelectorAll(".page").forEach(function(p){p.hidden=p.dataset.page!==h});
+ if(h==="notifications"){/* show unread styling first, then mark read */}
+ if(R[h])R[h]();if(h==="signin")setAuth(location.hash==="#signup");
+ if(h==="notifications"){S.notifs.forEach(function(n){n.read=true});save();setTimeout(function(){chrome("notifications")},0)}
+ chrome(h);if(!keep)window.scrollTo(0,0)}
+window.addEventListener("hashchange",function(){route(false)});
+
+/* ---------- actions ---------- */
+function refresh(){route(true)}
+function pledge(){var p=pById(CUR.pid),tier=CUR.tier||"Silver",tt=T[tier],v=+($("#pamt").value),note=$("#paynote");CUR.amt=v;
+ if(!(v>=tt.min&&v<=tt.max)){CUR.pnote=tier+" pledges are "+tt.label.replace(/ - /," to ")+". Enter an amount in that range.";refresh();return}
+ var before=pct(p),early=before<50;S.pledges.push({pid:p.id,tier:tier,amount:v,ts:Date.now(),early:early});S.points+=tt.pts;
+ var after=pct(p);[25,50,75,100].forEach(function(m){if(before<m&&after>=m)notify("milestones",p.title+" reached "+m+"% of its goal.")});
+ notify("system","You backed "+p.title+" at the "+tier+" tier for "+money(v)+" and earned "+tt.pts+" points.");
+ CUR.amt=null;CUR.pnote="Design preview: no payment was taken. Your "+money(v)+" "+tier+" pledge was recorded, you earned "+tt.pts+" points, and the tracks it unlocks are in My support.";save();refresh()}
+function afterUpdate(id,text){var p=pById(id),who=aname(p);S.updates[id]=S.updates[id]||[];S.updates[id].unshift({text:text,ts:Date.now(),who:who,likes:0});
+ var hit=fol(p.aid)||pledgesFor(id).length>0;if(hit)notify("updates",who+" posted an update on "+p.title+".");save();return hit}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-act]");if(!b)return;var d=b.dataset,a=d.act;
+ if(a==="follow"){var i=S.follows.indexOf(d.id);if(i>-1)S.follows.splice(i,1);else{S.follows.push(d.id);var ar=aById(d.id);notify("system","You are now following "+(ar?ar.name:"this artist")+".")}save();refresh()}
+ else if(a==="save"){var j=S.saves.indexOf(d.id);if(j>-1)S.saves.splice(j,1);else S.saves.push(d.id);save();refresh()}
+ else if(a==="project"){CUR.pid=d.id;CUR.tier="Silver";CUR.amt=null;CUR.pnote="";go("fund")}
+ else if(a==="artist"){CUR.aid=d.id;go("artist")}
+ else if(a==="nav"){go(d.to)}
+ else if(a==="tier"){CUR.tier=d.t;CUR.amt=null;CUR.pnote="";refresh()}
+ else if(a==="play"){play(b,+d.i)}
+ else if(a==="like"){var k=d.pid+":"+d.k;S.likes[k]=!S.likes[k];save();refresh()}
+ else if(a==="copy"){var n=$("#cnote"),u=location.href;try{navigator.clipboard.writeText(u).then(function(){n.textContent="Link copied."},function(){n.textContent="Copy this link: "+u})}catch(x){n.textContent="Copy this link: "+u}}
+ else if(a==="pgenre"){F.genre=d.g;R.projects()} else if(a==="pending"){F.ending=!F.ending;R.projects()} else if(a==="psaved"){F.saved=!F.saved;R.projects()}
+ else if(a==="agenre"){FA.genre=d.g;R.artists()} else if(a==="afollowing"){FA.following=!FA.following;R.artists()}
+ else if(a==="bcat"){BF=d.c;R.blog()} else if(a==="post"){CUR.post=d.id||null;R.blog();window.scrollTo(0,0)}
+ else if(a==="readall"){S.notifs.forEach(function(n){n.read=true});save();refresh()} else if(a==="clearn"){S.notifs=[];save();refresh()}
+ else if(a==="conn"){S.conn[d.p]=!S.conn[d.p];save();refresh()}
+ else if(a==="signout"){S.user=null;save();location.hash="home";route()}
+ else if(a==="reset"){S=fresh();save();location.hash="home";route()}
+ else if(a==="buy"){var bs=allSales().filter(function(z){return z.id===d.id})[0],bn=$("#sn-"+d.id);
+  if(bs.aid==="me"){bn.textContent="You can’t buy your own song.";return}
+  if(!remain(bs)){bn.textContent="Sold out.";return}
+  S.buys[bs.id]=(S.buys[bs.id]||0)+1;notify("system","You bought “"+bs.title+"” for "+money2(bs.price)+" (preview, no payment taken).");save();refresh();var bn2=$("#sn-"+d.id);if(bn2)bn2.textContent="Added to your library. Preview only: no payment was taken."}
+ else if(a==="social"){S.user={name:d.p+" user",email:""};S.conn[d.p]=true;notify("system","Signed in with "+d.p+".");save();go("dashboard")}});
+document.addEventListener("input",function(e){var id=e.target.id;
+ if(id==="qp"){F.q=e.target.value;projList()}else if(id==="qa"){FA.q=e.target.value;artList()}else if(id==="qf"){FQ=e.target.value;faqList()}
+ else if(id==="pamt"){var rp=pById(CUR.pid),rv=+e.target.value||0;$("#royamt").textContent=money(rv);$("#royest").textContent=money2(rest(rp,rv));$("#roitab").innerHTML=roiHtml(rp,rv)}});
+document.addEventListener("change",function(e){var id=e.target.id;
+ if(id==="psort"){F.sort=e.target.value;projList()}else if(id==="pprice"){F.price=e.target.value;projList()}else if(id==="spick"){CUR.spid=e.target.value;R.studio()}});
+document.addEventListener("submit",function(e){var f=e.target.closest("[data-form]");if(!f)return;e.preventDefault();var t=f.dataset.form,id=f.dataset.id,say=function(sel,m){var n=$(sel);if(n)n.textContent=m};
+ if(t==="pledge")pledge();
+ else if(t==="comment"){var v=$("#ct").value.trim();if(!v)return;(S.comments[id]=S.comments[id]||[]).unshift({who:me(),text:v,ts:Date.now()});save();refresh()}
+ else if(t==="msg"){var m=$("#mt").value.trim();if(!m)return;S.msgs.unshift({aid:id,from:me(),text:m,ts:Date.now()});save();$("#mt").value="";say("#mnote","Message sent to "+aById(id).name+".")}
+ else if(t==="update"){var u=$("#ut").value.trim();if(!u)return;var hit=afterUpdate(id,u);CUR.unote=hit;refresh();say("#unote",hit?"Update posted. Followers and backers were notified (check Notifications).":"Update posted. Nobody follows or backs this project yet, so no one was notified.")}
+ else if(t==="blast"){var x=$("#bm").value.trim();if(!x)return;S.sent.unshift({pid:id,to:$("#bt").value,text:x,ts:Date.now()});save();refresh();say("#bnote","Message sent to "+$("#bt").value.toLowerCase()+".")}
+ else if(t==="access"){var o=S.over[id]=S.over[id]||{},p=pById(id);o.access={Bronze:+$("#acBronze").value,Silver:+$("#acSilver").value,Gold:+$("#acGold").value};o.release=$("#acr").value;o.roy=Math.max(0,Math.min(50,+$("#acy").value||0));save();refresh();say("#anote","Access saved. The project page now shows the new tiers.")}
+ else if(t==="profile"){S.user=S.user||{name:"",email:""};S.user.name=$("#pn1").value.trim()||S.user.name||"Guest";S.user.email=$("#pe1").value.trim();S.profile={bio:$("#pb1").value,spotify:$("#ps1").value,instagram:$("#pi1").value,twitter:$("#pt1").value};save();chrome("account");say("#prnote","Profile saved.")}
+ else if(t==="prefs"){["updates","launches","milestones"].forEach(function(k){S.prefs[k]=$("#pf-"+k).checked});save();say("#pfnote","Preferences saved.")}
+ else if(t==="bid"){var sg=allSongs().filter(function(z){return z.id===id})[0],mn=minBid(sg),bv=+$("#bid-"+id).value;
+  if(sg.aid==="me"){say("#bn-"+id,"You can’t bid on your own song.");return}
+  if(!(bv>=mn)){say("#bn-"+id,"Bid at least "+money(mn)+".");return}
+  var pb=S.bids[id]||{cur:0,n:0,mine:0};S.bids[id]={cur:bv,n:(pb.n||0)+1,mine:bv};notify("system","You are the top bidder on “"+sg.title+"” at "+money(bv)+".");save();refresh();say("#bn-"+id,"Bid placed. Preview only: no payment was taken.")}
+ else if(t==="sale"){var lt=$("#slt").value.trim();if(!lt)return;var lp=Math.max(1,+$("#slp").value||1),lc=Math.max(1,+$("#slc").value||1);
+  S.sales.unshift({id:"n"+Date.now(),title:lt,aid:"me",aname:me(),price:lp,stock:lc,sold:0});notify("launches","“"+lt+"” is for sale at "+money2(lp)+".");save();refresh();say("#slnote","“"+lt+"” is for sale. It now appears on the Songs page.")}
+ else if(t==="song"){var st=$("#sgt").value.trim();if(!st)return;var s0=Math.max(1,+$("#sgs").value||1),dd=Math.max(1,Math.min(30,+$("#sgd").value||7)),ry=Math.max(0,Math.min(50,+$("#sgr").value||0));
+  S.songs.unshift({id:"m"+Date.now(),title:st,aid:"me",aname:me(),start:s0,inc:Math.max(5,Math.round(s0*.1)),end:Date.now()+dd*864e5,roy:ry,n:0,base:0});notify("launches","“"+st+"” is on bid for "+dd+" days.");save();refresh();say("#sgnote","“"+st+"” is on bid. It now appears on the Bids page.")}
+ else if(t==="help"){var hm=$("#hm").value.trim();if(!hm)return;S.help.unshift({text:hm,ts:Date.now()});save();$("#hm").value="";say("#hnote","Thanks. Your message was saved in this preview; no email was sent.")}});
+
+/* ---------- start-a-project form ---------- */
+var step=1,sf=$("#sform");
+function showStep(){sf.querySelectorAll("[data-s]").forEach(function(d){d.hidden=(+d.dataset.s!==step)});document.querySelectorAll("#stepper .s").forEach(function(s,i){s.classList.toggle("on",i+1<=step)});$("#back").hidden=step===1;$("#next").textContent=step===3?"LAUNCH":"NEXT";$("#sdone").hidden=true;$("#smsg").textContent=""}
+$("#back").addEventListener("click",function(){step--;showStep()});
+sf.addEventListener("submit",function(e){e.preventDefault();var msg=$("#smsg");
+ if(step===1&&!$("#an").value.trim()&&!(S.user&&S.user.name)){msg.textContent="Enter your name to continue.";return}
+ if(step===2){if(!$("#pt").value.trim()){msg.textContent="Give your project a title.";return}if(!(+$("#pgoal").value>=100)){msg.textContent="Set a funding goal of at least $100.";return}}
+ if(step<3){step++;showStep();window.scrollTo(0,0);return}
+ var n=Math.max(1,+$("#pn").value||1),id="c"+Date.now(),tl=[],i,title=$("#pt").value.trim(),nm=$("#an").value.trim()||(S.user&&S.user.name)||"You";
+ for(i=1;i<=n;i++)tl.push("Track "+i);
+ var p=mk(id,title,"me",$("#pg").value,n,$("#pk").value.toUpperCase(),"TBC",+$("#pgoal").value,0,0,+$("#pdays").value||30,50,[0,0,0,0,0,0,0],{Bronze:0,Silver:0,Gold:0},tl,Date.now());
+ p.aname=nm;p.mine=true;p.desc=$("#pd").value.trim()||"A new "+p.type.toLowerCase()+" from "+nm+".";
+ S.over[id]={access:{Bronze:Math.min(+$("#rb").value||0,n),Silver:Math.min(+$("#rs").value||0,n),Gold:Math.min(+$("#rg").value||0,n)},release:"",roy:Math.max(0,Math.min(50,+$("#rr").value||0))};
+ if(IMGS.pending){IMGS[id]=IMGS.pending;IMGS.pending=null}
+ S.custom.push(p);if(!S.user){S.user={name:nm,email:""}}notify("launches",title+" is live. Open Studio to post your first update.");CUR.spid=id;save();
+ $("#sdone-t").textContent=title+" is now listed with a "+money(p.goal)+" goal for "+p.days+" days.";$("#sdone").hidden=false;chrome("start")});
+function prev(id,tid,isCover){$("#"+id).addEventListener("change",function(e){var f=e.target.files[0];if(!f)return;var l=e.target.parentNode,im=l.querySelector("img");if(!im){im=document.createElement("img");im.alt="";l.insertBefore(im,l.firstChild)}var u=URL.createObjectURL(f);im.src=u;$("#"+tid).textContent=f.name;if(isCover)IMGS.pending=u})}
+prev("pic","pic-t",false);prev("cov","cov-t",true);
+
+/* ---------- auth + newsletter ---------- */
+var up=false;
+function setAuth(isUp){up=isUp;var w=isUp?"Sign up":"Sign in";$("#auth-h").textContent=isUp?"Welcome to Artist Grow":"Welcome back.";$("#auth-b").textContent=isUp?"SIGN UP":"SIGN IN";$("#l-name").hidden=!isUp;$("#l-pw2").hidden=!isUp;$("#meta").hidden=isUp;
+ document.querySelectorAll(".soc").forEach(function(b){b.textContent=w+" with "+b.dataset.p});$("#auth-alt").innerHTML=isUp?'Existing user? <a href="#signin">Log In</a>':'New User? <a href="#signup">Sign Up</a>';$("#auth-m").textContent=""}
+$("#auth-form").addEventListener("submit",function(e){e.preventDefault();var em=$("#em").value,pw=$("#pw").value,m=$("#auth-m");
+ if(!/^\S+@\S+\.\S+$/.test(em)){m.textContent="Enter a valid email address.";return}
+ if(pw.length<6){m.textContent="Use a password of at least 6 characters.";return}
+ if(up){if(!$("#fn").value.trim()){m.textContent="Enter your full name.";return}if(pw!==$("#pw2").value){m.textContent="The passwords do not match.";return}}
+ S.user={name:up?$("#fn").value.trim():(S.user&&S.user.name)||em.split("@")[0],email:em};notify("system",(up?"Account created. Welcome, ":"Signed in. Welcome back, ")+S.user.name+".");save();go("dashboard")});
+$("#nl").addEventListener("submit",function(e){e.preventDefault();var v=$("#nle").value,m=$("#nlm");m.textContent=/^\S+@\S+\.\S+$/.test(v)?"Thanks. This is a design preview, so nothing was subscribed.":"Enter a valid email address."});
+route();
+})();
+</script>
