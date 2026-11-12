@@ -79,6 +79,8 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .tag{display:inline-block;background:var(--green);color:#fff;font-size:12px;padding:5px 12px;text-transform:uppercase}
 .phl{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;color:rgba(255,255,255,.75);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:center}
 .phl svg{width:44px;height:44px}
+.roy-call{border:1px solid var(--green);background:rgba(29,185,84,.12);border-radius:10px;padding:16px 20px;margin:18px 0;font-size:18px;line-height:1.6}
+.roy-call b{color:var(--green);font-size:1.4em}
 .pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .proj{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:40px;margin-top:56px}
 .proj .cover{aspect-ratio:1/1.1;position:relative;overflow:hidden}
@@ -236,6 +238,7 @@ footer .logo{justify-content:center}
     <a href="#how-it-works" data-r="how-it-works">HOW IT WORKS</a>
     <a href="#artists" data-r="artists">ARTISTS</a>
     <a href="#projects" data-r="projects">PROJECTS</a>
+    <a href="#bids" data-r="bids">SONGS</a>
     <a href="#blog" data-r="blog">BLOG</a>
     <a href="#about" data-r="about">ABOUT</a>
     <a href="#notifications" class="bell" data-r="notifications" aria-label="Notifications"><svg><use href="#bel"/></svg><span class="ct" id="bct" hidden>0</span></a>
@@ -249,6 +252,7 @@ footer .logo{justify-content:center}
     <svg class="crowd" viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true"><path d="M0 280V190c40-30 70-60 100-20s40 40 70 0 50-70 90-30 40 50 80 10 60-60 100-20 50 40 90 0 60-80 100-30 40 60 80 20 70-70 110-20 40 50 80 10 60-60 100-20 50 40 90 0 60-70 100-30 40 50 80 10 60-40 110-20 40 30 70 10V280z" fill="#050806"/></svg>
     <div class="wrap">
       <h1>Be a true fan of your favourite artist.</h1>
+      <p class="sub" style="margin:-12px auto 28px;max-width:30em;color:#e9f7ee">Back an album or EP and earn a share of its royalties.</p>
       <div class="row"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a></div>
     </div>
   </div>
@@ -256,7 +260,7 @@ footer .logo{justify-content:center}
     <h2 class="eyebrow">Why ArtistGrow</h2>
     <p class="sub">WHAT MAKES US DIFFERENT</p>
     <div class="why">
-      <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Reward-based funding</h3><p>Back an album or EP and receive points, early access and tracks in return for your support.</p></article>
+      <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Earn a share of the royalties</h3><p>Back an album or EP and receive points, early access, tracks and a share of the royalties in return for your support.</p></article>
       <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Manage access</h3><p>Artists decide which tracks each funding tier unlocks, and fans see exactly what they get.</p></article>
       <article><div class="ic"><svg width="28" height="28"><use href="#chk"/></svg></div><h3>Direct to the artist</h3><p>Your contribution goes toward the project you picked, so the people who make the music grow with it.</p></article>
     </div>
@@ -264,14 +268,24 @@ footer .logo{justify-content:center}
   </div>
   <div class="wrap"><hr class="rule"></div>
   <div class="wrap sec">
+    <h2 class="eyebrow">How royalties work</h2>
+    <p class="sub">YOUR PLEDGE BUYS A SHARE OF WHAT THE MUSIC EARNS.</p>
+    <div class="why">
+      <article><div class="ic"><b style="font-size:26px">1</b></div><h3>Back a project</h3><p>Pledge to a tier. Your pledge is your slice of the project's royalty pool.</p></article>
+      <article><div class="ic"><b style="font-size:26px">2</b></div><h3>The music earns</h3><p>Streams and sales generate royalties after release. The artist sets the percentage shared with backers.</p></article>
+      <article><div class="ic"><b style="font-size:26px">3</b></div><h3>You share the income</h3><p>Royalties are split in proportion to pledges. See estimates and scenarios on every project page.</p></article>
+    </div>
+    <p class="note">Preview only: all figures are samples, returns are not guaranteed and no money moves.</p>
+    <hr class="rule" style="margin:48px 0">
     <h2 class="eyebrow">What you can do</h2>
     <p class="sub">PICK WHERE TO START.</p>
     <div class="acts">
-      <a class="act" href="#projects"><span class="who">Fans</span><h3>Fund a project</h3><p>Choose a Bronze, Silver or Gold tier, pledge an amount and unlock tracks.</p><span class="go2">Browse projects →</span></a>
+      <a class="act" href="#projects"><span class="who">Fans</span><h3>Fund a project</h3><p>Choose a Bronze, Silver or Gold tier, pledge an amount, unlock tracks and earn a share of the royalties.</p><span class="go2">Browse projects →</span></a>
       <a class="act" href="#artists"><span class="who">Fans</span><h3>Follow artists</h3><p>Follow artists to hear when they post updates or launch a new project.</p><span class="go2">Discover artists →</span></a>
       <a class="act" href="#dashboard"><span class="who">Fans</span><h3>Track your support</h3><p>See what you backed, your points, badges and the tracks you have unlocked.</p><span class="go2">Open my support →</span></a>
       <a class="act" href="#start"><span class="who">Artists</span><h3>Start a project</h3><p>Share your profile, set a goal and choose what each tier unlocks.</p><span class="go2">Start now →</span></a>
       <a class="act" href="#studio"><span class="who">Artists</span><h3>Run your studio</h3><p>Post updates, message backers, control access and read your analytics.</p><span class="go2">Open studio →</span></a>
+      <a class="act" href="#bids"><span class="who">Fans and artists</span><h3>Buy or bid on songs</h3><p>Buy a song outright, or bid for early access and a share of its royalties.</p><span class="go2">See songs →</span></a>
       <a class="act" href="#help"><span class="who">Everyone</span><h3>Get help</h3><p>Search the help center, read the blog or contact the team.</p><span class="go2">Help center →</span></a>
     </div>
   </div>
@@ -303,7 +317,7 @@ footer .logo{justify-content:center}
       <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Discover projects.</h3><p>Browse albums and EPs, filter by genre, and preview tracks.</p></div></div>
       <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Select a project.</h3><p>Open a project to read about it and see the funding tiers.</p></div></div>
       <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Choose a funding option.</h3><p>Pick Bronze, Silver or Gold and enter your pledge amount.</p></div></div>
-      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Collect your rewards.</h3><p>Receive artist-grow points and access to the tracks your tier unlocks.</p></div></div>
+      <div class="step"><div class="ck"><svg width="24" height="24"><use href="#chk"/></svg></div><div><h3>Collect your rewards.</h3><p>Receive artist-grow points, access to the tracks your tier unlocks and a share of the project's royalties.</p></div></div>
     </div>
     <div class="row" style="margin-top:56px"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a><a class="btn alt" href="#help">More questions</a></div>
   </div>
@@ -353,6 +367,7 @@ footer .logo{justify-content:center}
           <div class="field"><label for="rb">Bronze: tracks unlocked</label><input class="in" id="rb" type="number" min="0" value="2"></div>
           <div class="field"><label for="rs">Silver: tracks unlocked</label><input class="in" id="rs" type="number" min="0" value="6"></div>
           <div class="field"><label for="rg">Gold: tracks unlocked</label><input class="in" id="rg" type="number" min="0" value="10"></div>
+          <div class="field"><label for="rr">Royalty share to backers (%)</label><input class="in" id="rr" type="number" min="0" max="50" value="10"></div>
         </div>
       </div>
       <p class="msg" id="smsg" role="status"></p>
@@ -387,6 +402,7 @@ footer .logo{justify-content:center}
 <section class="page" data-page="notifications" hidden></section>
 <section class="page" data-page="help" hidden></section>
 <section class="page" data-page="blog" hidden></section>
+<section class="page" data-page="bids" hidden></section>
 <section class="page" data-page="about" hidden></section>
 </main>
 
@@ -438,6 +454,9 @@ var BLOG=[
 var FAQ=[
  ["How do I fund a project?","Open a project, choose Bronze, Silver or Gold, enter an amount in that tier's range and press Proceed to payment."],
  ["What do I get for backing?","Artist-grow points and access to the tracks your tier unlocks. Each artist chooses which tracks belong to which tier."],
+ ["How do royalties work?","Artists can share a percentage of a project's streaming royalties with backers, split in proportion to pledges. In this preview the figures are samples and no money is paid."],
+ ["How do I sell a song?","Open Studio, choose Put a song up for sale, set a price and the number of copies. Buyers see it on the Songs page. In this preview no payment is taken."],
+ ["How do song bids work?","Artists put a song on bid with a starting price and a duration. The highest bid when time runs out wins early access and the royalty share the artist set. In this preview no payment is taken."],
  ["Can I back more than one project?","Yes. Each pledge is separate and appears in My support."],
  ["How do I start a project?","Open Start a project, add your details, set a goal and length, and choose what each tier unlocks."],
  ["How do I post an update to backers?","Open Studio, pick your project and write an update. Followers and backers are notified."],
@@ -449,9 +468,10 @@ var BOARD=[["Chioma E.",2400],["Daniel K.",1900],["Priya S.",1450],["Tom R.",900
 
 /* ---------- state ---------- */
 var store=null;try{store=window.localStorage}catch(e){}
-function fresh(){return {follows:[],saves:[],pledges:[],points:0,notifs:[{id:"n0",type:"system",text:"Welcome to ArtistGrow. Follow artists and back projects to see activity here.",ts:Date.now(),read:false}],comments:{},updates:{},custom:[],msgs:[],sent:[],user:null,profile:{bio:"",spotify:"",instagram:"",twitter:""},prefs:{updates:true,launches:true,milestones:true},conn:{Google:false,Facebook:false,Spotify:false},over:{},likes:{},help:[]}}
+function fresh(){return {follows:[],saves:[],pledges:[],points:0,notifs:[{id:"n0",type:"system",text:"Welcome to ArtistGrow. Follow artists and back projects to see activity here.",ts:Date.now(),read:false}],comments:{},updates:{},custom:[],msgs:[],sent:[],user:null,profile:{bio:"",spotify:"",instagram:"",twitter:""},prefs:{updates:true,launches:true,milestones:true},conn:{Google:false,Facebook:false,Spotify:false},over:{},likes:{},help:[],bids:{},songs:[],t0:Date.now(),buys:{},sales:[]}}
 var S=fresh();
 try{var raw=store&&store.getItem("ag-v2");if(raw){var o=JSON.parse(raw);for(var k in o)S[k]=o[k]}}catch(e){}
+if(!S.t0)S.t0=Date.now();if(!S.bids)S.bids={};if(!S.songs)S.songs=[];if(!S.buys)S.buys={};if(!S.sales)S.sales=[];
 function save(){try{store&&store.setItem("ag-v2",JSON.stringify(S))}catch(e){}}
 var IMGS={};var CUR={pid:"p1",aid:"ige",post:null,spid:"p1"};
 var F={q:"",genre:"All",sort:"new",price:"any",saved:false,ending:false};
@@ -478,6 +498,47 @@ function pledgesFor(id){return S.pledges.filter(function(x){return x.pid===id})}
 function raised(p){return p.raised+pledgesFor(p.id).reduce(function(s,x){return s+x.amount},0)}
 function backers(p){return p.backers+pledgesFor(p.id).length}
 function pct(p){return Math.min(100,Math.round(raised(p)/p.goal*100))}
+var ROY={p1:[20,1800],p2:[15,1400],p3:[25,3200],p4:[15,900],p5:[10,500],p6:[20,1100]};
+function roy(p){var o=S.over[p.id];return o&&o.roy!=null?o.roy:(ROY[p.id]?ROY[p.id][0]:10)}
+function rmo(p){return ROY[p.id]?ROY[p.id][1]:600}
+function rest(p,amt){return amt/p.goal*roy(p)/100*rmo(p)}
+function money2(n){return "$"+n.toFixed(2)}
+function roiHtml(p,amt){var rows=[["Low (half of sample)",.5],["Base (sample)",1],["High (1.5x sample)",1.5]].map(function(s){var m=rest(p,amt)*s[1],y=m*12;return '<tr><td>'+s[0]+'</td><td class="n">'+money2(y)+'</td><td class="n">'+(amt>0?Math.round(y/amt*100):0)+'%</td><td class="n">'+(m>0?(amt/m).toFixed(1)+' mo':'n/a')+'</td></tr>'}).join("");
+ return '<table class="tbl"><thead><tr><th>Scenario</th><th class="n">12-month royalties</th><th class="n">Return on pledge</th><th class="n">Break-even</th></tr></thead><tbody>'+rows+'</tbody></table><p class="stats" style="margin-top:10px">Returns are illustrations, not guarantees. You could earn nothing and not get your pledge back.</p>'}
+var SONGS=[
+ {id:"s1",title:"Last call (unreleased)",aid:"ige",start:100,inc:25,h:52,base:410,n:9,roy:5},
+ {id:"s2",title:"Porch light (live demo)",aid:"amara",start:150,inc:25,h:20,base:520,n:12,roy:4},
+ {id:"s3",title:"Detty (club remix)",aid:"tobi",start:200,inc:50,h:76,base:880,n:17,roy:8},
+ {id:"s4",title:"Slant light (solo piano)",aid:"nina",start:120,inc:20,h:5,base:260,n:6,roy:3}
+];
+function allSongs(){return S.songs.concat(SONGS)}
+function bstate(s){var b=S.bids[s.id];return {cur:b?b.cur:(s.base||s.start),n:(s.n||0)+(b?b.n:0),mine:b?b.mine:0}}
+function endTs(s){return s.end||(S.t0+s.h*3600000)}
+function left(s){var ms=endTs(s)-Date.now();if(ms<=0)return "Closed";var h=Math.floor(ms/3600000),d=Math.floor(h/24);return d>0?d+"d "+(h%24)+"h left":h+"h "+Math.floor(ms%3600000/60000)+"m left"}
+function minBid(s){var b=bstate(s);return b.n>0?b.cur+s.inc:s.start}
+function sname(s){var a=aById(s.aid);return s.aname||(a?a.name:"Artist")}
+function songCard(s){var b=bstate(s),closed=left(s)==="Closed",mn=minBid(s);
+ return '<article class="panel"><div class="mini" style="justify-content:space-between"><h3 style="margin:0">'+esc(s.title)+'</h3><span class="tag">'+left(s)+'</span></div><p class="stats">by <b>'+esc(sname(s))+'</b> · '+b.n+' bids · starting bid '+money(s.start)+'</p>'+
+ '<div class="tiles" style="margin-top:12px"><div class="tile"><b>'+money(b.cur)+'</b><span>Current bid</span></div><div class="tile"><b>'+s.roy+'%</b><span>Song royalty share (sample)</span></div></div>'+
+ '<p class="note left">The top bid wins early access, a credit and the royalty share above.</p>'+(b.mine?'<p><span class="badge">You are leading at '+money(b.mine)+'</span></p>':'')+
+ (closed?'<p class="note left">Bidding closed at '+money(b.cur)+'.</p>':'<form class="pledge" data-form="bid" data-id="'+s.id+'" novalidate style="justify-content:flex-start"><label for="bid-'+s.id+'">Your bid ($)<input class="in s" id="bid-'+s.id+'" type="number" min="'+mn+'" value="'+mn+'"></label><button class="btn sm" type="submit">Place bid</button></form><p class="note left" id="bn-'+s.id+'" role="status"></p>')+'</article>'}
+function bidsHtml(){var rows=allSongs().filter(function(s){return S.bids[s.id]&&S.bids[s.id].mine}).map(function(s){var b=bstate(s),c=left(s)==="Closed";return '<tr><td>'+esc(s.title)+'</td><td class="n">'+money(b.mine)+'</td><td>'+(c?"Closed (preview, no payment taken)":"Leading · "+left(s))+'</td></tr>'}).join("");
+ return rows?'<div class="scroll"><table class="tbl"><thead><tr><th>Song</th><th class="n">My bid</th><th>Status</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No bids yet. <a href="#bids" style="color:var(--green)">See songs on bid</a>.</p>'}
+var SALES=[
+ {id:"f1",title:"Home by dawn (full song)",aid:"ige",price:15,stock:100,sold:64},
+ {id:"f2",title:"Honey (acoustic version)",aid:"amara",price:9,stock:250,sold:171},
+ {id:"f3",title:"Pepper (extended mix)",aid:"tobi",price:12,stock:60,sold:58},
+ {id:"f4",title:"Interval (piano score and recording)",aid:"nina",price:20,stock:40,sold:12}
+];
+function allSales(){return S.sales.concat(SALES)}
+function remain(s){return Math.max(0,s.stock-s.sold-(S.buys[s.id]||0))}
+function saleCard(s){var r=remain(s),mine=S.buys[s.id]||0;
+ return '<article class="panel"><div class="mini" style="justify-content:space-between"><h3 style="margin:0">'+esc(s.title)+'</h3><span class="tag">For sale</span></div><p class="stats">by <b>'+esc(sname(s))+'</b></p>'+
+ '<div class="tiles" style="margin-top:12px"><div class="tile"><b>'+money2(s.price)+'</b><span>Price</span></div><div class="tile"><b>'+r+'</b><span>Copies left</span></div></div>'+
+ '<p class="note left">Buyers get the full song in their library.</p>'+(mine?'<p><span class="badge">You own '+mine+(mine>1?" copies":" copy")+'</span></p>':'')+
+ '<div class="toolbar">'+(r?'<button class="btn sm" data-act="buy" data-id="'+s.id+'">Buy now for '+money2(s.price)+'</button>':'<button class="btn sm" disabled>Sold out</button>')+'</div><p class="note left" id="sn-'+s.id+'" role="status"></p></article>'}
+function buysHtml(){var rows=allSales().filter(function(s){return S.buys[s.id]}).map(function(s){return '<tr><td>'+esc(s.title)+'</td><td>'+esc(sname(s))+'</td><td class="n">'+S.buys[s.id]+'</td><td class="n">'+money2(S.buys[s.id]*s.price)+'</td></tr>'}).join("");
+ return rows?'<div class="scroll"><table class="tbl"><thead><tr><th>Song</th><th>Artist</th><th class="n">Copies</th><th class="n">Paid (preview)</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No songs bought yet. <a href="#bids" style="color:var(--green)">See songs for sale</a>.</p>'}
 function sameDay(a,b){return new Date(a).toDateString()===new Date(b).toDateString()}
 function fdate(ts){return new Date(ts).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}
 function ftime(ts){return fdate(ts)+", "+new Date(ts).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}
@@ -494,7 +555,7 @@ function sav(id){return S.saves.indexOf(id)>-1}
 function artistCard(a){var t=tone(idxOf(A,a.id));
  return '<article class="artist"><div class="ph" style="background:linear-gradient(160deg,'+t[0]+','+t[1]+')"></div><img class="pimg" alt="" src="'+portrait(idxOf(A,a.id))+'"><div class="shade"></div><div class="cap"><h3>'+esc(a.name)+'</h3><div><span class="tag">'+esc(a.genre)+'</span></div><div class="btns"><button class="btn sm ghost" data-act="follow" data-id="'+a.id+'" aria-pressed="'+fol(a.id)+'">'+(fol(a.id)?"Following":"Follow")+'</button><button class="btn sm" data-act="artist" data-id="'+a.id+'">View profile</button></div></div></article>'}
 function projCard(p){
- return '<article class="proj">'+cover(p)+'<div><div class="date">Release '+esc(p.date)+'</div><h3>'+esc(p.title)+' <small>by</small> <em>'+esc(aname(p))+'</em></h3><div class="tags"><span class="tag">'+esc(p.genre)+'</span><span class="tag">'+p.tracks+' TRACKS</span><span class="tag">'+esc(p.type)+'</span></div>'+bar(p)+'<p style="margin-top:14px">'+esc(p.desc)+'</p><div class="acts2"><button class="btn" data-act="project" data-id="'+p.id+'">Fund a project</button><button class="btn ghost sm" data-act="save" data-id="'+p.id+'" aria-pressed="'+sav(p.id)+'">'+(sav(p.id)?"Saved":"Save")+'</button></div></div></article>'}
+ return '<article class="proj">'+cover(p)+'<div><div class="date">Release '+esc(p.date)+'</div><h3>'+esc(p.title)+' <small>by</small> <em>'+esc(aname(p))+'</em></h3><div class="tags"><span class="tag">'+esc(p.genre)+'</span><span class="tag">'+p.tracks+' TRACKS</span><span class="tag">'+esc(p.type)+'</span><span class="tag" style="background:#fff;color:#0d6b2e;font-weight:700">'+roy(p)+'% ROYALTY SHARE</span></div>'+bar(p)+'<p style="margin-top:14px">'+esc(p.desc)+'</p><div class="acts2"><button class="btn" data-act="project" data-id="'+p.id+'">Fund a project</button><button class="btn ghost sm" data-act="save" data-id="'+p.id+'" aria-pressed="'+sav(p.id)+'">'+(sav(p.id)?"Saved":"Save")+'</button></div></div></article>'}
 function go(name){if(location.hash==="#"+name)route(true);else location.hash=name}
 
 /* ---------- preview audio ---------- */
@@ -560,12 +621,13 @@ R.fund=function(){var p=pById(CUR.pid)||P[0],i=idxOf(allP(),p.id),a=acc(p),rd=re
  '<div class="fund-h"><h2>'+esc(p.title)+'</h2><div class="by">by <button data-act="artist" data-id="'+(p.aid==="me"?"ige":p.aid)+'"'+(p.aid==="me"?" disabled":"")+'>'+esc(aname(p))+'</button></div><span>Release '+esc(p.date)+'</span></div>'+
  '<div class="tags"><span class="tag">'+esc(p.genre)+'</span><span class="tag">'+p.tracks+' TRACKS</span><span class="tag">'+esc(p.type)+'</span></div>'+bar(p)+
  '<div class="toolbar"><button class="btn ghost sm" data-act="save" data-id="'+p.id+'" aria-pressed="'+sav(p.id)+'">'+(sav(p.id)?"Saved":"Save")+'</button>'+(p.aid!=="me"?'<button class="btn ghost sm" data-act="follow" data-id="'+p.aid+'" aria-pressed="'+fol(p.aid)+'">'+(fol(p.aid)?"Following":"Follow artist")+'</button>':'')+'<button class="btn ghost sm" data-act="copy">Copy link</button><a class="btn ghost sm" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text='+txt+'&url='+shareUrl+'">Share on X</a><a class="btn ghost sm" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+shareUrl+'">Share on Facebook</a></div><p class="note left" id="cnote" role="status"></p>'+
- '<p class="lead">'+esc(p.desc)+'</p>'+
+ '<div class="roy-call"><b>'+roy(p)+'%</b> of this project\'s streaming royalties are shared with its backers, in proportion to their pledges. See estimates below.</div><p class="lead">'+esc(p.desc)+'</p>'+
  '<h3 class="eyebrow" style="font-size:24px;margin-top:20px">Tracks</h3><div class="trk">'+trk+'</div>'+(rd?'<p class="note left">Tier tracks unlock on '+esc(rd)+'.</p>':'')+
  '<h3 class="eyebrow" style="font-size:24px;margin-top:32px">Choose a tier</h3>'+
- '<div class="tiers" role="group" aria-label="Funding tiers">'+["Bronze","Silver","Gold"].map(function(n){var x=T[n];return '<button class="tier" type="button" data-act="tier" data-t="'+n+'" aria-pressed="'+(sel===n)+'"><span class="nm">'+n+'</span><ul><li>Get '+x.pts+' artist-grow points</li><li>Access to '+(a[n]>=p.tracks?"all":a[n])+' tracks on the '+(p.type==="ALBUM"?"album":"project")+'</li></ul><span class="pr">'+x.label+'</span></button>'}).join("")+'</div>'+
+ '<div class="tiers" role="group" aria-label="Funding tiers">'+["Bronze","Silver","Gold"].map(function(n){var x=T[n];return '<button class="tier" type="button" data-act="tier" data-t="'+n+'" aria-pressed="'+(sel===n)+'"><span class="nm">'+n+'</span><ul><li>Get '+x.pts+' artist-grow points</li><li>Access to '+(a[n]>=p.tracks?"all":a[n])+' tracks on the '+(p.type==="ALBUM"?"album":"project")+'</li><li>Share of the '+roy(p)+'% royalty pool</li></ul><span class="pr">'+x.label+'</span></button>'}).join("")+'</div>'+
  '<form class="pledge" data-form="pledge" novalidate><label for="pamt">Pledge amount ($)<input class="in s" id="pamt" type="number" min="'+tt.min+'" max="'+tt.max+'" value="'+(CUR.amt||tt.min)+'"></label><button class="btn sq" type="submit">PROCEED TO PAYMENT</button></form>'+
  '<p class="note" id="paynote" role="status">'+(CUR.pnote||(sel+" tier selected. Enter "+tt.label.replace(/ - /," to ")+"."))+'</p>'+
+ '<div class="panel" style="max-width:1100px;margin:24px auto;border-color:var(--green)"><h3>Royalty share and return (preview)</h3><p class="stats" style="font-size:15px;line-height:1.8">Backers share <b>'+roy(p)+'%</b> of this project\'s streaming royalties, split in proportion to what each backer pledged. Based on sample royalties of '+money(rmo(p))+' a month, a <span id="royamt">'+money(CUR.amt||tt.min)+'</span> pledge would earn about <b id="royest">'+money2(rest(p,CUR.amt||tt.min))+'</b> a month. These are sample figures, not a promise: real royalties depend on streams, and paying them out would need legal review.</p><div id="roitab" class="scroll">'+roiHtml(p,CUR.amt||tt.min)+'</div></div>'+
  '<div class="grid2"><div class="panel"><h3>Updates from the artist</h3><div class="feed">'+ups+'</div></div>'+
  '<div class="panel"><h3>Messages</h3>'+cms+'<form data-form="comment" data-id="'+p.id+'" style="margin-top:14px"><label class="lab" for="ct">Leave a message<textarea class="in s" id="ct" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Post message</button></div></form></div></div></div>'};
 
@@ -575,13 +637,15 @@ function badges(){var ps=S.pledges,l=[
 R.dashboard=function(){var total=S.pledges.reduce(function(s,x){return s+x.amount},0),ids=[];S.pledges.forEach(function(x){if(ids.indexOf(x.pid)<0)ids.push(x.pid)});
  var board=BOARD.concat([[me()+" (you)",S.points]]).sort(function(a,b){return b[1]-a[1]});
  var backed=S.pledges.slice().reverse().map(function(x){var p=pById(x.pid);if(!p)return "";var n=Math.min(acc(p)[x.tier],p.tracks),r=rel(p),locked=r&&new Date(r)>new Date();
-  return '<tr><td><button class="btn ghost sm" data-act="project" data-id="'+p.id+'">'+esc(p.title)+'</button></td><td>'+x.tier+'</td><td class="n">'+money(x.amount)+'</td><td>'+(locked?"Unlocks "+esc(r):esc(p.tl.slice(0,n).join(", ")))+'</td><td>'+fdate(x.ts)+'</td></tr>'}).join("");
+  return '<tr><td><button class="btn ghost sm" data-act="project" data-id="'+p.id+'">'+esc(p.title)+'</button></td><td>'+x.tier+'</td><td class="n">'+money(x.amount)+'</td><td>'+(locked?"Unlocks "+esc(r):esc(p.tl.slice(0,n).join(", ")))+'</td><td class="n">'+money2(rest(p,x.amount))+'</td><td>'+fdate(x.ts)+'</td></tr>'}).join("");
  $('[data-page="dashboard"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">My support</h2><p class="sub">Welcome, '+esc(me())+'.</p>'+
- '<div class="tiles"><div class="tile"><b>'+ids.length+'</b><span>Projects backed</span></div><div class="tile"><b>'+money(total)+'</b><span>Total pledged</span></div><div class="tile"><b>'+S.points+'</b><span>Artist-grow points</span></div><div class="tile"><b>'+S.follows.length+'</b><span>Artists followed</span></div></div>'+
+ '<div class="tiles"><div class="tile"><b>'+ids.length+'</b><span>Projects backed</span></div><div class="tile"><b>'+money(total)+'</b><span>Total pledged</span></div><div class="tile"><b>'+S.points+'</b><span>Artist-grow points</span></div><div class="tile"><b>'+S.follows.length+'</b><span>Artists followed</span></div><div class="tile"><b>'+money2(S.pledges.reduce(function(s,x){var q=pById(x.pid);return s+(q?rest(q,x.amount):0)},0))+'</b><span>Est. royalties / month (sample)</span></div></div>'+
  '<div class="panel"><h3>Badges</h3>'+badges()+'</div>'+
- '<div class="panel"><h3>Projects you backed</h3>'+(backed?'<div class="scroll"><table class="tbl"><thead><tr><th>Project</th><th>Tier</th><th class="n">Amount</th><th>Unlocked tracks</th><th>Date</th></tr></thead><tbody>'+backed+'</tbody></table></div>':'<p class="empty">You have not backed a project yet. <a href="#projects" style="color:var(--green)">Browse projects</a>.</p>')+'</div>'+
+ '<div class="panel"><h3>Projects you backed</h3>'+(backed?'<div class="scroll"><table class="tbl"><thead><tr><th>Project</th><th>Tier</th><th class="n">Amount</th><th>Unlocked tracks</th><th class="n">Est. royalties / mo</th><th>Date</th></tr></thead><tbody>'+backed+'</tbody></table></div>':'<p class="empty">You have not backed a project yet. <a href="#projects" style="color:var(--green)">Browse projects</a>.</p>')+'</div>'+
  '<div class="grid2"><div class="panel"><h3>Saved projects</h3>'+(S.saves.length?S.saves.map(function(id){var p=pById(id);return p?'<p><button class="btn ghost sm" data-act="project" data-id="'+p.id+'">'+esc(p.title)+'</button> <span class="stats">'+pct(p)+'% funded</span></p>':""}).join(""):'<p class="empty">Nothing saved yet.</p>')+'</div>'+
  '<div class="panel"><h3>Artists you follow</h3>'+(S.follows.length?S.follows.map(function(id){var a=aById(id);return a?'<p><button class="btn ghost sm" data-act="artist" data-id="'+a.id+'">'+esc(a.name)+'</button></p>':""}).join(""):'<p class="empty">You are not following anyone yet.</p>')+'</div></div>'+
+ '<div class="panel"><h3>Songs I bought</h3>'+buysHtml()+'</div>'+
+ '<div class="panel"><h3>My bids</h3>'+bidsHtml()+'</div>'+
  '<div class="panel"><h3>Points leaderboard</h3><div class="scroll"><table class="tbl"><thead><tr><th>#</th><th>Backer</th><th class="n">Points</th></tr></thead><tbody>'+board.map(function(r,i){return '<tr'+(r[0].indexOf("(you)")>-1?' class="me"':"")+'><td>'+(i+1)+'</td><td>'+esc(r[0])+'</td><td class="n">'+r[1]+'</td></tr>'}).join("")+'</tbody></table></div></div></div>'};
 
 function mine(){return [P[0]].concat(S.custom)}
@@ -601,7 +665,9 @@ R.studio=function(){var l=mine(),p=pById(CUR.spid)||l[0];CUR.spid=p.id;var a=acc
  '<div class="panel"><h3>Progress</h3>'+bar(p)+'</div>'+
  '<div class="grid2"><form class="panel" data-form="update" data-id="'+p.id+'"><h3>Post an update</h3><label class="lab" for="ut">Update for backers and followers<textarea class="in s" id="ut" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Post update</button></div><p class="note left" id="unote" role="status"></p></form>'+
  '<form class="panel" data-form="blast" data-id="'+p.id+'"><h3>Message backers</h3><label class="lab" for="bt">Send to<select class="in s" id="bt"><option>All backers</option><option>Bronze</option><option>Silver</option><option>Gold</option></select></label><label class="lab" for="bm" style="margin-top:10px">Message<textarea class="in s" id="bm" required></textarea></label><div class="toolbar"><button class="btn sm" type="submit">Send message</button></div><p class="note left" id="bnote" role="status">Backers: Bronze '+c.Bronze+', Silver '+c.Silver+', Gold '+c.Gold+'.</p></form></div>'+
- '<form class="panel" data-form="access" data-id="'+p.id+'"><h3>Control access</h3><p class="stats">Choose how many tracks each tier unlocks, and when they unlock. Project has '+p.tracks+' tracks.</p><div class="fgrid">'+["Bronze","Silver","Gold"].map(function(k){return '<label class="lab" for="ac'+k+'">'+k+' tracks<input class="in s" id="ac'+k+'" type="number" min="0" max="'+p.tracks+'" value="'+Math.min(a[k],p.tracks)+'"></label>'}).join("")+'<label class="lab" for="acr">Release date (optional)<input class="in s" id="acr" type="date" value="'+esc(rel(p))+'"></label></div><div class="toolbar"><button class="btn sm" type="submit">Save access</button></div><p class="note left" id="anote" role="status"></p></form>'+
+ '<form class="panel" data-form="access" data-id="'+p.id+'"><h3>Control access</h3><p class="stats">Choose how many tracks each tier unlocks, and when they unlock. Project has '+p.tracks+' tracks.</p><div class="fgrid">'+["Bronze","Silver","Gold"].map(function(k){return '<label class="lab" for="ac'+k+'">'+k+' tracks<input class="in s" id="ac'+k+'" type="number" min="0" max="'+p.tracks+'" value="'+Math.min(a[k],p.tracks)+'"></label>'}).join("")+'<label class="lab" for="acy">Royalty share to backers (%)<input class="in s" id="acy" type="number" min="0" max="50" value="'+roy(p)+'"></label><label class="lab" for="acr">Release date (optional)<input class="in s" id="acr" type="date" value="'+esc(rel(p))+'"></label></div><div class="toolbar"><button class="btn sm" type="submit">Save access</button></div><p class="note left" id="anote" role="status"></p></form>'+
+ '<form class="panel" data-form="sale"><h3>Put a song up for sale</h3><div class="fgrid"><label class="lab" for="slt">Song title<input class="in s" id="slt" required></label><label class="lab" for="slp">Price ($)<input class="in s" id="slp" type="number" min="1" value="10"></label><label class="lab" for="slc">Copies available<input class="in s" id="slc" type="number" min="1" value="100"></label></div><div class="toolbar"><button class="btn sm" type="submit">List song for sale</button><a class="btn ghost sm" href="#bids">See all songs</a></div><p class="note left" id="slnote" role="status"></p></form>'+
+ '<form class="panel" data-form="song"><h3>Put a song on bid</h3><div class="fgrid"><label class="lab" for="sgt">Song title<input class="in s" id="sgt" required></label><label class="lab" for="sgs">Starting bid ($)<input class="in s" id="sgs" type="number" min="1" value="100"></label><label class="lab" for="sgd">Duration (days)<input class="in s" id="sgd" type="number" min="1" max="30" value="7"></label><label class="lab" for="sgr">Song royalty share to winner (%)<input class="in s" id="sgr" type="number" min="0" max="50" value="5"></label></div><div class="toolbar"><button class="btn sm" type="submit">Place song on bid</button><a class="btn ghost sm" href="#bids">See all songs on bid</a></div><p class="note left" id="sgnote" role="status"></p></form>'+
  '<div class="panel"><h3>Analytics</h3><p class="stats">Funding in the last 7 days. Daily history before today is sample data; pledges you make here are added to today.</p>'+chart(p)+'<div class="grid2" style="margin-top:18px"><div><h3 style="font-size:16px">Backers by tier</h3>'+tierSplit(p)+'</div><div><h3 style="font-size:16px">Where visitors come from (sample)</h3>'+Object.keys(SRC).map(function(k){return '<div class="stats" style="justify-content:space-between"><span>'+k+'</span><span><b>'+SRC[k]+'%</b></span></div><div class="bar"><i style="width:'+SRC[k]+'%"></i></div>'}).join("")+'</div></div></div>'+
  '<div class="grid2"><div class="panel"><h3>Posted updates</h3><div class="feed">'+ups+'</div></div><div class="panel"><h3>Messages sent</h3><div class="feed">'+sent+'</div></div></div>'+
  '<div class="panel"><h3>Fan messages</h3><div class="feed">'+inbox+'</div></div></div>'};
@@ -627,12 +693,16 @@ R.blog=function(){var cur=CUR.post&&BLOG.filter(function(b){return b.id===CUR.po
  else{h+='<div class="chips" style="justify-content:flex-start">'+["All","Interviews","Announcements"].map(function(c){return '<button class="btn ghost sm" data-act="bcat" data-c="'+c+'" aria-pressed="'+(BF===c)+'">'+c+'</button>'}).join("")+'</div>'+BLOG.filter(function(b){return BF==="All"||b.cat===BF}).map(function(b){return '<article class="post"><span class="cat">'+esc(b.cat)+'</span><h3>'+esc(b.title)+'</h3><span class="stats">'+esc(b.date)+'</span><p>'+esc(b.body[0])+'</p><div><button class="btn sm" data-act="post" data-id="'+b.id+'">Read article</button></div></article>'}).join("")}
  $('[data-page="blog"]').innerHTML=h+'</div>'};
 
+R.bids=function(){$('[data-page="bids"]').innerHTML='<div class="wrap sec"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">Songs</h2><p class="sub">Buy a song outright or bid for early access and a share of its royalties.</p><p class="note left">Preview only: sales and bids are samples, no payment is taken, and royalty sharing would need legal review.</p>'+
+ '<h3 class="eyebrow" style="font-size:26px;margin-top:32px">For sale</h3><div class="grid2" style="margin-top:16px">'+allSales().map(saleCard).join("")+'</div>'+
+ '<h3 class="eyebrow" style="font-size:26px;margin-top:48px">On bid</h3><div class="grid2" style="margin-top:16px">'+allSongs().map(songCard).join("")+'</div></div>'};
+
 R.about=function(){$('[data-page="about"]').innerHTML='<div class="wrap sec" style="max-width:900px"><h2 class="eyebrow" style="font-size:clamp(34px,5vw,45px)">About ArtistGrow</h2><p class="sub">A way for fans to help the artists they love release their next project.</p>'+
  '<div class="why" style="text-align:left"><article style="text-align:left"><h3>Our idea</h3><p>Artists set a goal and tiers. Fans pledge to the tier they like and receive points and track access in return.</p></article><article style="text-align:left"><h3>For fans</h3><p>Follow artists, preview tracks, back projects and keep track of what you have unlocked.</p></article><article style="text-align:left"><h3>For artists</h3><p>Run a campaign, talk to backers, control who hears what and watch the numbers.</p></article></div>'+
  '<div class="row" style="margin-top:40px"><a class="btn" href="#projects">Fund a project</a><a class="btn alt" href="#start">Start a project</a><a class="btn alt" href="#help">Contact us</a></div></div>'};
 
 /* ---------- routing ---------- */
-var NAMES=["home","how-it-works","artists","artist","projects","fund","start","signin","dashboard","studio","account","notifications","help","blog","about"];
+var NAMES=["home","how-it-works","artists","artist","projects","fund","start","signin","dashboard","studio","account","notifications","help","blog","about","bids"];
 function menu(){$("#pop").innerHTML=(S.user?'<div class="who">Signed in as '+esc(S.user.name)+'</div>':'<div class="who">Browsing as guest</div>')+'<a href="#dashboard">My support</a><a href="#studio">Studio</a><a href="#account">Account</a><a href="#notifications">Notifications</a><a href="#help">Help</a>'+(S.user?'<button data-act="signout">Sign out</button>':'<a href="#signin">Sign in</a><a href="#signup">Sign up</a>')}
 function chrome(h){var c=unread(),b=$("#bct");b.hidden=!c;b.textContent=c>99?"99+":c;
  document.querySelectorAll("nav.top a[data-r]").forEach(function(a){a.classList.toggle("on",a.dataset.r===h||(h==="fund"&&a.dataset.r==="projects")||(h==="artist"&&a.dataset.r==="artists"))});menu()}
@@ -672,9 +742,14 @@ document.addEventListener("click",function(e){var b=e.target.closest("[data-act]
  else if(a==="conn"){S.conn[d.p]=!S.conn[d.p];save();refresh()}
  else if(a==="signout"){S.user=null;save();location.hash="home";route()}
  else if(a==="reset"){S=fresh();save();location.hash="home";route()}
+ else if(a==="buy"){var bs=allSales().filter(function(z){return z.id===d.id})[0],bn=$("#sn-"+d.id);
+  if(bs.aid==="me"){bn.textContent="You can’t buy your own song.";return}
+  if(!remain(bs)){bn.textContent="Sold out.";return}
+  S.buys[bs.id]=(S.buys[bs.id]||0)+1;notify("system","You bought “"+bs.title+"” for "+money2(bs.price)+" (preview, no payment taken).");save();refresh();var bn2=$("#sn-"+d.id);if(bn2)bn2.textContent="Added to your library. Preview only: no payment was taken."}
  else if(a==="social"){S.user={name:d.p+" user",email:""};S.conn[d.p]=true;notify("system","Signed in with "+d.p+".");save();go("dashboard")}});
 document.addEventListener("input",function(e){var id=e.target.id;
- if(id==="qp"){F.q=e.target.value;projList()}else if(id==="qa"){FA.q=e.target.value;artList()}else if(id==="qf"){FQ=e.target.value;faqList()}});
+ if(id==="qp"){F.q=e.target.value;projList()}else if(id==="qa"){FA.q=e.target.value;artList()}else if(id==="qf"){FQ=e.target.value;faqList()}
+ else if(id==="pamt"){var rp=pById(CUR.pid),rv=+e.target.value||0;$("#royamt").textContent=money(rv);$("#royest").textContent=money2(rest(rp,rv));$("#roitab").innerHTML=roiHtml(rp,rv)}});
 document.addEventListener("change",function(e){var id=e.target.id;
  if(id==="psort"){F.sort=e.target.value;projList()}else if(id==="pprice"){F.price=e.target.value;projList()}else if(id==="spick"){CUR.spid=e.target.value;R.studio()}});
 document.addEventListener("submit",function(e){var f=e.target.closest("[data-form]");if(!f)return;e.preventDefault();var t=f.dataset.form,id=f.dataset.id,say=function(sel,m){var n=$(sel);if(n)n.textContent=m};
@@ -683,9 +758,17 @@ document.addEventListener("submit",function(e){var f=e.target.closest("[data-for
  else if(t==="msg"){var m=$("#mt").value.trim();if(!m)return;S.msgs.unshift({aid:id,from:me(),text:m,ts:Date.now()});save();$("#mt").value="";say("#mnote","Message sent to "+aById(id).name+".")}
  else if(t==="update"){var u=$("#ut").value.trim();if(!u)return;var hit=afterUpdate(id,u);CUR.unote=hit;refresh();say("#unote",hit?"Update posted. Followers and backers were notified (check Notifications).":"Update posted. Nobody follows or backs this project yet, so no one was notified.")}
  else if(t==="blast"){var x=$("#bm").value.trim();if(!x)return;S.sent.unshift({pid:id,to:$("#bt").value,text:x,ts:Date.now()});save();refresh();say("#bnote","Message sent to "+$("#bt").value.toLowerCase()+".")}
- else if(t==="access"){var o=S.over[id]=S.over[id]||{},p=pById(id);o.access={Bronze:+$("#acBronze").value,Silver:+$("#acSilver").value,Gold:+$("#acGold").value};o.release=$("#acr").value;save();refresh();say("#anote","Access saved. The project page now shows the new tiers.")}
+ else if(t==="access"){var o=S.over[id]=S.over[id]||{},p=pById(id);o.access={Bronze:+$("#acBronze").value,Silver:+$("#acSilver").value,Gold:+$("#acGold").value};o.release=$("#acr").value;o.roy=Math.max(0,Math.min(50,+$("#acy").value||0));save();refresh();say("#anote","Access saved. The project page now shows the new tiers.")}
  else if(t==="profile"){S.user=S.user||{name:"",email:""};S.user.name=$("#pn1").value.trim()||S.user.name||"Guest";S.user.email=$("#pe1").value.trim();S.profile={bio:$("#pb1").value,spotify:$("#ps1").value,instagram:$("#pi1").value,twitter:$("#pt1").value};save();chrome("account");say("#prnote","Profile saved.")}
  else if(t==="prefs"){["updates","launches","milestones"].forEach(function(k){S.prefs[k]=$("#pf-"+k).checked});save();say("#pfnote","Preferences saved.")}
+ else if(t==="bid"){var sg=allSongs().filter(function(z){return z.id===id})[0],mn=minBid(sg),bv=+$("#bid-"+id).value;
+  if(sg.aid==="me"){say("#bn-"+id,"You can’t bid on your own song.");return}
+  if(!(bv>=mn)){say("#bn-"+id,"Bid at least "+money(mn)+".");return}
+  var pb=S.bids[id]||{cur:0,n:0,mine:0};S.bids[id]={cur:bv,n:(pb.n||0)+1,mine:bv};notify("system","You are the top bidder on “"+sg.title+"” at "+money(bv)+".");save();refresh();say("#bn-"+id,"Bid placed. Preview only: no payment was taken.")}
+ else if(t==="sale"){var lt=$("#slt").value.trim();if(!lt)return;var lp=Math.max(1,+$("#slp").value||1),lc=Math.max(1,+$("#slc").value||1);
+  S.sales.unshift({id:"n"+Date.now(),title:lt,aid:"me",aname:me(),price:lp,stock:lc,sold:0});notify("launches","“"+lt+"” is for sale at "+money2(lp)+".");save();refresh();say("#slnote","“"+lt+"” is for sale. It now appears on the Songs page.")}
+ else if(t==="song"){var st=$("#sgt").value.trim();if(!st)return;var s0=Math.max(1,+$("#sgs").value||1),dd=Math.max(1,Math.min(30,+$("#sgd").value||7)),ry=Math.max(0,Math.min(50,+$("#sgr").value||0));
+  S.songs.unshift({id:"m"+Date.now(),title:st,aid:"me",aname:me(),start:s0,inc:Math.max(5,Math.round(s0*.1)),end:Date.now()+dd*864e5,roy:ry,n:0,base:0});notify("launches","“"+st+"” is on bid for "+dd+" days.");save();refresh();say("#sgnote","“"+st+"” is on bid. It now appears on the Bids page.")}
  else if(t==="help"){var hm=$("#hm").value.trim();if(!hm)return;S.help.unshift({text:hm,ts:Date.now()});save();$("#hm").value="";say("#hnote","Thanks. Your message was saved in this preview; no email was sent.")}});
 
 /* ---------- start-a-project form ---------- */
@@ -700,7 +783,7 @@ sf.addEventListener("submit",function(e){e.preventDefault();var msg=$("#smsg");
  for(i=1;i<=n;i++)tl.push("Track "+i);
  var p=mk(id,title,"me",$("#pg").value,n,$("#pk").value.toUpperCase(),"TBC",+$("#pgoal").value,0,0,+$("#pdays").value||30,50,[0,0,0,0,0,0,0],{Bronze:0,Silver:0,Gold:0},tl,Date.now());
  p.aname=nm;p.mine=true;p.desc=$("#pd").value.trim()||"A new "+p.type.toLowerCase()+" from "+nm+".";
- S.over[id]={access:{Bronze:Math.min(+$("#rb").value||0,n),Silver:Math.min(+$("#rs").value||0,n),Gold:Math.min(+$("#rg").value||0,n)},release:""};
+ S.over[id]={access:{Bronze:Math.min(+$("#rb").value||0,n),Silver:Math.min(+$("#rs").value||0,n),Gold:Math.min(+$("#rg").value||0,n)},release:"",roy:Math.max(0,Math.min(50,+$("#rr").value||0))};
  if(IMGS.pending){IMGS[id]=IMGS.pending;IMGS.pending=null}
  S.custom.push(p);if(!S.user){S.user={name:nm,email:""}}notify("launches",title+" is live. Open Studio to post your first update.");CUR.spid=id;save();
  $("#sdone-t").textContent=title+" is now listed with a "+money(p.goal)+" goal for "+p.days+" days.";$("#sdone").hidden=false;chrome("start")});
